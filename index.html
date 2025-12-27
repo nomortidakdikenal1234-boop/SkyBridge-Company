@@ -5,43 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SkyBridge Company | Enterprise Technology Solutions</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --blue-dark:#0b2a4a;
   --blue:#1e4fd8;
   --blue-soft:#eef4ff;
-  --white:#ffffff;
-  --gray:#6b7280;
+  --bg:#ffffff;
+  --text:#111827;
+  --card:#ffffff;
+  --border:#e5e7eb;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/* ===== DARK MODE ===== */
+[data-theme="dark"]{
+  --bg:#0b1220;
+  --text:#e5e7eb;
+  --card:#0f172a;
+  --border:#1e293b;
+  --blue-soft:#111827;
 }
 
+*{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Poppins,sans-serif;
-  background:var(--white);
-  color:#111827;
+  background:var(--bg);
+  color:var(--text);
   line-height:1.7;
+  transition:.3s;
 }
 
-a{
-  color:var(--blue);
-  text-decoration:none;
-}
+a{color:var(--blue);text-decoration:none}
 
 /* ===== NAV ===== */
 nav{
-  position:sticky;
-  top:0;
-  background:var(--white);
-  border-bottom:1px solid #e5e7eb;
+  position:sticky;top:0;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
   z-index:10;
 }
 nav ul{
@@ -49,59 +50,58 @@ nav ul{
   margin:auto;
   padding:18px 20px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   list-style:none;
 }
-nav img{
-  height:42px;
-}
-nav a{
-  font-weight:500;
+nav img{height:42px}
+.nav-links a{
   margin-left:30px;
-  color:var(--blue-dark);
+  font-weight:500;
+  color:var(--text);
 }
-nav a:hover{
-  color:var(--blue);
+.nav-links a:hover{color:var(--blue)}
+
+/* ===== THEME SWITCH ===== */
+.theme-switch{
+  margin-left:25px;
+  padding:6px 14px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--card);
+  cursor:pointer;
+  font-size:.85rem;
 }
 
 /* ===== HERO ===== */
 header{
-  background:linear-gradient(135deg,var(--white),var(--blue-soft));
-  padding:120px 20px;
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url("https://idn.freepik.com/foto/perusahaan");
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  padding:140px 20px;
 }
 .hero{
   max-width:1200px;
   margin:auto;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
+  grid-template-columns:1.2fr .8fr;
   gap:60px;
+  align-items:center;
 }
-.hero img{
-  width:220px;
-}
-.hero h1{
-  font-size:3.2rem;
-  color:var(--blue-dark);
-  margin-bottom:15px;
-}
-.hero p{
-  color:var(--gray);
-  font-size:1.1rem;
-  margin-bottom:30px;
-}
+.hero img{width:230px}
+.hero h1{font-size:3.4rem;margin-bottom:15px}
+.hero p{opacity:.9;font-size:1.1rem;margin-bottom:30px}
 .btn{
-  padding:14px 36px;
+  padding:14px 38px;
   background:var(--blue);
-  color:var(--white);
+  color:#fff;
   border-radius:999px;
   font-weight:600;
-  transition:.3s;
 }
-.btn:hover{
-  background:var(--blue-dark);
-}
+.btn:hover{background:#163eb3}
 
 /* ===== SECTION ===== */
 section{
@@ -109,10 +109,10 @@ section{
   margin:100px auto;
   padding:0 20px;
 }
-section h2{
-  font-size:2.1rem;
+h2{
+  font-size:2.2rem;
   color:var(--blue-dark);
-  margin-bottom:25px;
+  margin-bottom:30px;
 }
 
 /* ===== GRID ===== */
@@ -122,21 +122,23 @@ section h2{
   gap:35px;
 }
 .card{
-  background:var(--white);
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  padding:35px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:40px;
   transition:.3s;
 }
 .card:hover{
+  transform:translateY(-8px);
   border-color:var(--blue);
-  box-shadow:0 14px 40px rgba(30,79,216,.12);
+  box-shadow:0 15px 40px rgba(30,79,216,.15);
 }
 
 /* ===== CONTACT ===== */
 #contact{
   background:var(--blue-soft);
-  padding:90px 20px;
+  padding:100px 20px;
+  text-align:center;
 }
 
 /* ===== FOOTER ===== */
@@ -144,15 +146,12 @@ footer{
   background:var(--blue-dark);
   color:#c7d2fe;
   text-align:center;
-  padding:30px;
+  padding:35px;
 }
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
+  .hero{grid-template-columns:1fr;text-align:center}
 }
 </style>
 </head>
@@ -161,13 +160,12 @@ footer{
 
 <nav>
   <ul>
-    <li>
-      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png" alt="SkyBridge Company">
-    </li>
-    <li>
+    <li><img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png"></li>
+    <li class="nav-links">
       <a href="#about">About</a>
       <a href="#solutions">Solutions</a>
       <a href="#contact">Contact</a>
+      <button class="theme-switch" onclick="toggleTheme()">Theme</button>
     </li>
   </ul>
 </nav>
@@ -183,7 +181,7 @@ footer{
       <a href="#contact" class="btn">Get in Touch</a>
     </div>
     <div>
-      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png" alt="SkyBridge Logo">
+      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png">
     </div>
   </div>
 </header>
@@ -192,8 +190,8 @@ footer{
   <h2>About Us</h2>
   <p>
     SkyBridge Company adalah perusahaan teknologi yang menyediakan
-    solusi automation, bot system, dan digital tools untuk
-    komunitas, organisasi, dan bisnis modern.
+    solusi automation, bot system, dan digital tools
+    untuk bisnis dan organisasi modern.
   </p>
 </section>
 
@@ -202,7 +200,7 @@ footer{
   <div class="grid">
     <div class="card">
       <h3>Automation Systems</h3>
-      <p>Solusi sistem otomatis untuk operasional digital skala besar.</p>
+      <p>Sistem otomatis untuk operasional digital skala enterprise.</p>
     </div>
     <div class="card">
       <h3>Bot Development</h3>
@@ -210,7 +208,7 @@ footer{
     </div>
     <div class="card">
       <h3>Web Platforms</h3>
-      <p>Website statis, dashboard internal, dan tools berbasis web.</p>
+      <p>Website, dashboard internal, dan platform berbasis web.</p>
     </div>
   </div>
 </section>
@@ -218,14 +216,29 @@ footer{
 <section id="contact">
   <h2>Contact</h2>
   <p>
-    📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a><br>
-    💬 Discord Support
+    📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a><br><br>
+    💬 <a href="https://bit.ly/SBCompany" target="_blank">Discord Support</a>
   </p>
 </section>
 
 <footer>
   © 2025 SkyBridge Company — Enterprise Technology
 </footer>
+
+<script>
+let theme="system";
+function toggleTheme(){
+  if(theme==="system"){theme="dark";}
+  else if(theme==="dark"){theme="light";}
+  else{theme="system";}
+
+  if(theme==="system"){
+    document.documentElement.removeAttribute("data-theme");
+  }else{
+    document.documentElement.setAttribute("data-theme",theme);
+  }
+}
+</script>
 
 </body>
 </html>
