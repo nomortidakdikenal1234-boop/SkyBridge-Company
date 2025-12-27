@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyBridge Company | Enterprise Technology Solutions</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --blue-dark:#0b2a4a;
+  --blue:#1e4fd8;
+  --blue-soft:#eef4ff;
+  --white:#ffffff;
+  --gray:#6b7280;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Poppins,sans-serif;
+  background:var(--white);
+  color:#111827;
+  line-height:1.7;
+}
+
+a{
+  color:var(--blue);
+  text-decoration:none;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky;
+  top:0;
+  background:var(--white);
+  border-bottom:1px solid #e5e7eb;
+  z-index:10;
+}
+nav ul{
+  max-width:1200px;
+  margin:auto;
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  list-style:none;
+}
+nav img{
+  height:42px;
+}
+nav a{
+  font-weight:500;
+  margin-left:30px;
+  color:var(--blue-dark);
+}
+nav a:hover{
+  color:var(--blue);
+}
+
+/* ===== HERO ===== */
+header{
+  background:linear-gradient(135deg,var(--white),var(--blue-soft));
+  padding:120px 20px;
+}
+.hero{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:60px;
+}
+.hero img{
+  width:220px;
+}
+.hero h1{
+  font-size:3.2rem;
+  color:var(--blue-dark);
+  margin-bottom:15px;
+}
+.hero p{
+  color:var(--gray);
+  font-size:1.1rem;
+  margin-bottom:30px;
+}
+.btn{
+  padding:14px 36px;
+  background:var(--blue);
+  color:var(--white);
+  border-radius:999px;
+  font-weight:600;
+  transition:.3s;
+}
+.btn:hover{
+  background:var(--blue-dark);
+}
+
+/* ===== SECTION ===== */
+section{
+  max-width:1200px;
+  margin:100px auto;
+  padding:0 20px;
+}
+section h2{
+  font-size:2.1rem;
+  color:var(--blue-dark);
+  margin-bottom:25px;
+}
+
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:35px;
+}
+.card{
+  background:var(--white);
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:35px;
+  transition:.3s;
+}
+.card:hover{
+  border-color:var(--blue);
+  box-shadow:0 14px 40px rgba(30,79,216,.12);
+}
+
+/* ===== CONTACT ===== */
+#contact{
+  background:var(--blue-soft);
+  padding:90px 20px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--blue-dark);
+  color:#c7d2fe;
+  text-align:center;
+  padding:30px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <ul>
+    <li>
+      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png" alt="SkyBridge Company">
+    </li>
+    <li>
+      <a href="#about">About</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#contact">Contact</a>
+    </li>
+  </ul>
+</nav>
+
+<header>
+  <div class="hero">
+    <div>
+      <h1>SkyBridge Company</h1>
+      <p>
+        Enterprise technology solutions focused on automation,
+        bot development, and scalable digital systems.
+      </p>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+    <div>
+      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png" alt="SkyBridge Logo">
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>
+    SkyBridge Company adalah perusahaan teknologi yang menyediakan
+    solusi automation, bot system, dan digital tools untuk
+    komunitas, organisasi, dan bisnis modern.
+  </p>
+</section>
+
+<section id="solutions">
+  <h2>Enterprise Solutions</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Automation Systems</h3>
+      <p>Solusi sistem otomatis untuk operasional digital skala besar.</p>
+    </div>
+    <div class="card">
+      <h3>Bot Development</h3>
+      <p>Discord bot & service automation untuk komunitas dan perusahaan.</p>
+    </div>
+    <div class="card">
+      <h3>Web Platforms</h3>
+      <p>Website statis, dashboard internal, dan tools berbasis web.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>
+    📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a><br>
+    💬 Discord Support
+  </p>
+</section>
+
+<footer>
+  © 2025 SkyBridge Company — Enterprise Technology
+</footer>
+
+</body>
+</html>
