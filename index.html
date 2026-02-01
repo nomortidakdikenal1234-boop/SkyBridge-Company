@@ -35,111 +35,120 @@ body{
   transition:.3s;
 }
 
-/* ===== NAVIGATION ===== */
+a{color:var(--blue);text-decoration:none}
+
+/* ===== NAV ===== */
 nav{
   position:sticky;top:0;
   background:var(--bg);
   border-bottom:1px solid var(--border);
-  z-index:100;
+  z-index:10;
 }
 nav ul{
   max-width:1200px;
   margin:auto;
-  padding:15px 20px;
+  padding:18px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   list-style:none;
 }
-.nav-links{display:flex; align-items:center;}
-.nav-links a{
-  margin-left:25px;
+nav img{height:42px}
+.nav-links{ display: flex; align-items: center; }
+.nav-links a, .nav-links span{
+  margin-left:30px;
   font-weight:500;
   color:var(--text);
-  text-decoration:none;
-}
-.btn-login{
-  margin-left: 25px;
-  padding: 8px 20px;
-  background: var(--blue);
-  color: white !important;
-  border-radius: 8px;
   cursor: pointer;
 }
+.nav-links a:hover{color:var(--blue)}
 
-/* ===== LOGIN MODAL ===== */
-.modal-overlay {
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.6);
-    display: none; /* Hidden by default */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+.theme-switch{
+  margin-left:25px;
+  padding:6px 14px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--card);
+  cursor:pointer;
+  font-size:.85rem;
+  color: var(--text);
+}
+
+/* ===== MODAL LOGIN ===== */
+.modal-login {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
 }
 .modal-content {
-    background: var(--card);
-    padding: 40px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background: var(--card);
+  padding: 30px;
+  border-radius: 15px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-.modal-content input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
-    color: var(--text);
-}
-.modal-content h3 { margin-bottom: 20px; color: var(--blue-dark); }
-
-/* ===== DASHBOARD INFO ===== */
-#user-panel {
-    display: none;
-    background: var(--blue-soft);
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
+.modal-content input, .modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* Gaya bawaan Anda tetap di sini... */
+/* Sisa Style Hero & Section (Sama Persis) */
 header{
-  background: linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)), url("https://i.ibb.co.com/RTnVfwF8/image.png");
-  background-size:cover; background-position:center; color:#fff; padding:120px 20px;
+  background: linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url("https://i.ibb.co.com/RTnVfwF8/image.png");
+  background-size:cover; background-position:center; color:#fff; padding:140px 20px;
 }
 .hero{ max-width:1200px; margin:auto; display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:center; }
-.btn{ padding:14px 38px; background:var(--blue); color:#fff; border-radius:999px; font-weight:600; text-decoration:none; display:inline-block;}
-section{ max-width:1200px; margin:80px auto; padding:0 20px; }
-.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:30px; }
-.card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:30px; transition:.3s; }
+.hero img{width:230px}
+.hero h1{font-size:3.4rem;margin-bottom:15px}
+.hero p{opacity:.9;font-size:1.1rem;margin-bottom:30px}
+.btn{ padding:14px 38px; background:var(--blue); color:#fff; border-radius:999px; font-weight:600; border:none; cursor:pointer;}
+section{ max-width:1200px; margin:100px auto; padding:0 20px; }
+h2{ font-size:2.2rem; color:var(--blue-dark); margin-bottom:30px; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:35px; }
+.card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:40px; transition:.3s; }
+#contact{ background:var(--blue-soft); padding:100px 20px; text-align:center; }
+footer{ background:var(--blue-dark); color:#c7d2fe; text-align:center; padding:35px; }
+@media(max-width:900px){ .hero{grid-template-columns:1fr;text-align:center} }
 </style>
 </head>
 
 <body>
 
-<div class="modal-overlay" id="loginModal">
-    <div class="modal-content">
-        <h3 id="modalTitle">Login Ke SkyBridge</h3>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button class="btn" style="width:100%; border:none; cursor:pointer;" onclick="attemptLogin()">Masuk</button>
-        <p style="margin-top:15px; font-size: 0.8rem; cursor:pointer;" onclick="closeLogin()">Batal</p>
-    </div>
+<div id="loginModal" class="modal-login">
+  <div class="modal-content">
+    <h3 id="authTitle">Login / Register</h3>
+    <p style="font-size: 0.8rem; margin-bottom: 10px;">Jika username baru, password akan disimpan sebagai password baru anda.</p>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password Baru/Lama">
+    <select id="role">
+      <option value="customer">Sebagai Customer</option>
+      <option value="staff">Sebagai Staff</option>
+    </select>
+    <button class="btn" style="width:100%" onclick="handleAuth()">Masuk</button>
+    <button onclick="closeLogin()" style="background:none; border:none; color:var(--text); margin-top:10px; cursor:pointer;">Batal</button>
+  </div>
 </div>
 
 <nav>
   <ul>
-    <li class="nav-brand"><strong>SkyBridge</strong> Co.</li>
+    <li class="nav-brand">SkyBridge Company Website</li>
     <li class="nav-links">
       <a href="#about">About</a>
       <a href="#solutions">Solutions</a>
-      <span id="auth-section">
-          <a href="#" class="btn-login" onclick="openLogin()">Login</a>
-      </span>
+      <a href="#contact">Contact</a>
+      <span id="loginBtn" onclick="openLogin()">Login</span>
+      <span id="logoutBtn" onclick="logout()" style="display:none; color: #ff4d4d;">Logout</span>
+      <button class="theme-switch" onclick="toggleTheme()">Theme</button>
     </li>
   </ul>
 </nav>
@@ -147,115 +156,113 @@ section{ max-width:1200px; margin:80px auto; padding:0 20px; }
 <header>
   <div class="hero">
     <div>
-      <h1>SkyBridge Company</h1>
-      <p>Solusi teknologi enterprise fokus pada otomatisasi dan sistem digital skala besar.</p>
-      <div id="welcome-msg"></div>
+      <h1 id="welcomeText">SkyBridge Company</h1>
+      <p id="subText">Enterprise technology solutions focused on automation, bot development, and scalable digital systems.</p>
+      <a href="#contact" class="btn">Contact</a>
+    </div>
+    <div>
+      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png">
     </div>
   </div>
 </header>
 
-<section id="user-area" style="display:none;">
-    <div id="user-panel">
-        <h2 id="panel-title">Dashboard</h2>
-        <div id="panel-content"></div>
-        <br>
-        <button onclick="logout()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:5px; cursor:pointer;">Logout</button>
-    </div>
+<section id="dashboard" style="display:none; background: var(--blue-soft); padding: 40px; border-radius: 20px;">
+  <h2 id="dashTitle">User Dashboard</h2>
+  <div id="dashContent"></div>
 </section>
 
 <section id="about">
-  <h2>Tentang Kami</h2>
-  <p>Didirikan pada tahun 2025, SkyBridge hadir untuk memberikan layanan terpadu marketing, showroom, dan teknologi automation.</p>
+  <h2>About Us</h2>
+  <p>SkyBridge Company adalah perusahaan yang bergerak di bidang marketing, showroom, rental kendaraan, dan homestay premium...</p>
 </section>
 
 <section id="solutions">
   <h2>Enterprise Solutions</h2>
   <div class="grid">
-    <div class="card"><h3>Automation</h3><p>Sistem operasional digital.</p></div>
-    <div class="card"><h3>Bot Dev</h3><p>Official Discord Bot Developer.</p></div>
-    <div class="card"><h3>Web Dev</h3><p>Custom Dashboard & Platforms.</p></div>
+    <div class="card"><h3>Automation Systems</h3><p>Sistem otomatis untuk operasional digital.</p></div>
+    <div class="card"><h3>Bot Development</h3><p>Discord bot & service automation.</p></div>
+    <div class="card"><h3>Web Platforms</h3><p>Website & dashboard internal.</p></div>
   </div>
 </section>
 
+<section id="contact">
+  <h2>Contact</h2>
+  <p>📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a></p>
+</section>
+
+<footer>© 2025 SkyBridge Company — Enterprise Technology</footer>
+
 <script>
-// 1. DATABASE SEDERHANA (Simulasi)
-const userDatabase = [
-    {user: "admin", pass: "staff123", role: "staff", name: "Administrator SkyBridge"},
-    {user: "customer1", pass: "sky2025", role: "customer", name: "Budi Santoso"}
-];
-
-// 2. FUNGSI UI
-function openLogin() {
-    document.getElementById('loginModal').style.display = 'flex';
+// --- THEME LOGIC ---
+let theme="system";
+function toggleTheme(){
+  theme = (theme === "dark") ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", theme);
 }
 
-function closeLogin() {
-    document.getElementById('loginModal').style.display = 'none';
-}
+// --- LOGIN & DATABASE LOGIC ---
+const modal = document.getElementById('loginModal');
 
-function attemptLogin() {
-    const u = document.getElementById('username').value;
-    const p = document.getElementById('password').value;
+function openLogin() { modal.style.display = 'flex'; }
+function closeLogin() { modal.style.display = 'none'; }
 
-    // Cari user di database
-    const foundUser = userDatabase.find(user => user.user === u && user.pass === p);
+function handleAuth() {
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+  const role = document.getElementById('role').value;
 
-    if (foundUser) {
-        // Simpan sesi di LocalStorage
-        localStorage.setItem('currentUser', JSON.stringify(foundUser));
-        renderDashboard();
-        closeLogin();
+  if(!user || !pass) return alert("Isi username dan password!");
+
+  // Ambil data user dari "Database" (LocalStorage)
+  let db = JSON.parse(localStorage.getItem('sb_users')) || {};
+
+  if (db[user]) {
+    // Jika user ada, cek password
+    if (db[user].pass === pass) {
+      loginSuccess(user, db[user].role);
     } else {
-        alert("Username atau password salah!");
+      alert("Password salah untuk username ini!");
     }
+  } else {
+    // Jika user belum ada, buat baru (Password buat sendiri)
+    db[user] = { pass: pass, role: role };
+    localStorage.setItem('sb_users', JSON.stringify(db));
+    loginSuccess(user, role);
+    alert("Akun baru berhasil didaftarkan!");
+  }
 }
 
-function renderDashboard() {
-    const session = JSON.parse(localStorage.getItem('currentUser'));
-    if (!session) return;
-
-    // Sembunyikan tombol login, ganti jadi nama user
-    document.getElementById('auth-section').innerHTML = `<span>Halo, <b>${session.name}</b></span>`;
-    
-    // Tampilkan panel dashboard
-    document.getElementById('user-area').style.display = 'block';
-    const panelTitle = document.getElementById('panel-title');
-    const panelContent = document.getElementById('panel-content');
-
-    if (session.role === 'staff') {
-        panelTitle.innerText = "Staff Control Center";
-        panelContent.innerHTML = `
-            <p>Status Server: <span style="color:green">Online</span></p>
-            <ul>
-                <li>Kelola Pesanan Kendaraan</li>
-                <li>Audit Log Bot Discord</li>
-                <li>Database Customer</li>
-            </ul>
-        `;
-    } else {
-        panelTitle.innerText = "Customer Dashboard";
-        panelContent.innerHTML = `
-            <p>Selamat datang kembali! Berikut status layanan Anda:</p>
-            <div style="background:white; padding:15px; border-radius:10px; border:1px solid #ddd; margin-top:10px; color:black">
-                <b>Pesanan Aktif:</b> Rental Mobil (Sky-042) <br>
-                <b>Masa Sewa:</b> Hingga 2025-12-30
-            </div>
-        `;
-    }
+function loginSuccess(user, role) {
+  localStorage.setItem('currentUser', JSON.stringify({user, role}));
+  location.reload(); // Refresh untuk update tampilan
 }
 
 function logout() {
-    localStorage.removeItem('currentUser');
-    window.location.reload(); // Refresh halaman untuk reset state
+  localStorage.removeItem('currentUser');
+  location.reload();
 }
 
-// Cek status login saat halaman dimuat
+// --- RENDER LOGIC SAAT REFRESH ---
 window.onload = () => {
-    if (localStorage.getItem('currentUser')) {
-        renderDashboard();
+  const session = JSON.parse(localStorage.getItem('currentUser'));
+  if (session) {
+    document.getElementById('loginBtn').style.display = 'none';
+    document.getElementById('logoutBtn').style.display = 'inline';
+    document.getElementById('welcomeText').innerText = "Welcome, " + session.user;
+    document.getElementById('subText').innerText = "Anda masuk sebagai " + session.role.toUpperCase();
+    
+    // Tampilkan Dashboard
+    const dash = document.getElementById('dashboard');
+    const dashContent = document.getElementById('dashContent');
+    dash.style.display = 'block';
+    
+    if(session.role === 'staff') {
+      dashContent.innerHTML = "<p>⚙️ <b>Staff Panel:</b> Anda memiliki akses ke manajemen showroom dan sistem bot.</p>";
+    } else {
+      dashContent.innerHTML = "<p>👤 <b>Customer Panel:</b> Lihat riwayat sewa kendaraan dan homestay Anda di sini.</p>";
     }
+  }
 }
 </script>
-
 </body>
 </html>
