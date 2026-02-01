@@ -18,7 +18,6 @@
   --border:#e5e7eb;
 }
 
-/* ===== DARK MODE ===== */
 [data-theme="dark"]{
   --bg:#0b1220;
   --text:#e5e7eb;
@@ -36,136 +35,111 @@ body{
   transition:.3s;
 }
 
-a{color:var(--blue);text-decoration:none}
-
-/* ===== NAV ===== */
+/* ===== NAVIGATION ===== */
 nav{
   position:sticky;top:0;
   background:var(--bg);
   border-bottom:1px solid var(--border);
-  z-index:10;
+  z-index:100;
 }
 nav ul{
   max-width:1200px;
   margin:auto;
-  padding:18px 20px;
+  padding:15px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   list-style:none;
 }
-nav img{height:42px}
+.nav-links{display:flex; align-items:center;}
 .nav-links a{
-  margin-left:30px;
+  margin-left:25px;
   font-weight:500;
   color:var(--text);
+  text-decoration:none;
 }
-.nav-links a:hover{color:var(--blue)}
-
-/* ===== THEME SWITCH ===== */
-.theme-switch{
-  margin-left:25px;
-  padding:6px 14px;
-  border:1px solid var(--border);
-  border-radius:999px;
-  background:var(--card);
-  cursor:pointer;
-  font-size:.85rem;
+.btn-login{
+  margin-left: 25px;
+  padding: 8px 20px;
+  background: var(--blue);
+  color: white !important;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-/* ===== HERO ===== */
+/* ===== LOGIN MODAL ===== */
+.modal-overlay {
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background: var(--card);
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+}
+.modal-content h3 { margin-bottom: 20px; color: var(--blue-dark); }
+
+/* ===== DASHBOARD INFO ===== */
+#user-panel {
+    display: none;
+    background: var(--blue-soft);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+/* Gaya bawaan Anda tetap di sini... */
 header{
-  background:
-    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-    url("https://i.ibb.co.com/RTnVfwF8/image.png");
-  background-size:cover;
-  background-position:center;
-  color:#fff;
-  padding:140px 20px;
+  background: linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)), url("https://i.ibb.co.com/RTnVfwF8/image.png");
+  background-size:cover; background-position:center; color:#fff; padding:120px 20px;
 }
-.hero{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:60px;
-  align-items:center;
-}
-.hero img{width:230px}
-.hero h1{font-size:3.4rem;margin-bottom:15px}
-.hero p{opacity:.9;font-size:1.1rem;margin-bottom:30px}
-.btn{
-  padding:14px 38px;
-  background:var(--blue);
-  color:#fff;
-  border-radius:999px;
-  font-weight:600;
-}
-.btn:hover{background:#163eb3}
-
-/* ===== SECTION ===== */
-section{
-  max-width:1200px;
-  margin:100px auto;
-  padding:0 20px;
-}
-h2{
-  font-size:2.2rem;
-  color:var(--blue-dark);
-  margin-bottom:30px;
-}
-
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:35px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:40px;
-  transition:.3s;
-}
-.card:hover{
-  transform:translateY(-8px);
-  border-color:var(--blue);
-  box-shadow:0 15px 40px rgba(30,79,216,.15);
-}
-
-/* ===== CONTACT ===== */
-#contact{
-  background:var(--blue-soft);
-  padding:100px 20px;
-  text-align:center;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  background:var(--blue-dark);
-  color:#c7d2fe;
-  text-align:center;
-  padding:35px;
-}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;text-align:center}
-}
+.hero{ max-width:1200px; margin:auto; display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:center; }
+.btn{ padding:14px 38px; background:var(--blue); color:#fff; border-radius:999px; font-weight:600; text-decoration:none; display:inline-block;}
+section{ max-width:1200px; margin:80px auto; padding:0 20px; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:30px; }
+.card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:30px; transition:.3s; }
 </style>
 </head>
 
 <body>
 
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-content">
+        <h3 id="modalTitle">Login Ke SkyBridge</h3>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button class="btn" style="width:100%; border:none; cursor:pointer;" onclick="attemptLogin()">Masuk</button>
+        <p style="margin-top:15px; font-size: 0.8rem; cursor:pointer;" onclick="closeLogin()">Batal</p>
+    </div>
+</div>
+
 <nav>
   <ul>
-    <li class="nav-brand">SkyBridge Company Website</li>
+    <li class="nav-brand"><strong>SkyBridge</strong> Co.</li>
     <li class="nav-links">
       <a href="#about">About</a>
       <a href="#solutions">Solutions</a>
-      <a href="#contact">Contact</a>
-      <button class="theme-switch" onclick="toggleTheme()">Theme</button>
+      <span id="auth-section">
+          <a href="#" class="btn-login" onclick="openLogin()">Login</a>
+      </span>
     </li>
   </ul>
 </nav>
@@ -174,78 +148,112 @@ footer{
   <div class="hero">
     <div>
       <h1>SkyBridge Company</h1>
-      <p>
-        Enterprise technology solutions focused on automation,
-        bot development, and scalable digital systems.
-      </p>
-      <a href="#contact" class="btn">Contact</a>
-    </div>
-    <div>
-      <img src="https://i.ibb.co.com/6Kqpnzc/LOGO-SB-Co.png">
+      <p>Solusi teknologi enterprise fokus pada otomatisasi dan sistem digital skala besar.</p>
+      <div id="welcome-msg"></div>
     </div>
   </div>
 </header>
 
+<section id="user-area" style="display:none;">
+    <div id="user-panel">
+        <h2 id="panel-title">Dashboard</h2>
+        <div id="panel-content"></div>
+        <br>
+        <button onclick="logout()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:5px; cursor:pointer;">Logout</button>
+    </div>
+</section>
+
 <section id="about">
-  <h2>About Us</h2>
-  <p>
-    SkyBridge Company adalah perusahaan yang bergerak di bidang marketing,
-    showroom, rental kendaraan, dan homestay premium. Didirikan pada tahun 2025,
-    SkyBridge hadir untuk memberikan layanan terpadu yang mengutamakan kualitas,
-    kenyamanan, dan kepercayaan pelanggan.
-    <br><br>
-    Kami menyediakan showroom kendaraan berkualitas, layanan rental fleksibel,
-    dan homestay mewah yang dirancang untuk memenuhi kebutuhan gaya hidup
-    dan bisnis modern.
-    <br><br>
-    Selain itu, SkyBridge Company juga menyediakan layanan
-    <strong>Developer Bot Discord resmi</strong>
-    untuk mendukung kebutuhan komunitas dan bisnis digital.
-  </p>
+  <h2>Tentang Kami</h2>
+  <p>Didirikan pada tahun 2025, SkyBridge hadir untuk memberikan layanan terpadu marketing, showroom, dan teknologi automation.</p>
 </section>
 
 <section id="solutions">
   <h2>Enterprise Solutions</h2>
   <div class="grid">
-    <div class="card">
-      <h3>Automation Systems</h3>
-      <p>Sistem otomatis untuk operasional digital skala enterprise.</p>
-    </div>
-    <div class="card">
-      <h3>Bot Development</h3>
-      <p>Discord bot & service automation untuk komunitas dan perusahaan.</p>
-    </div>
-    <div class="card">
-      <h3>Web Platforms</h3>
-      <p>Website, dashboard internal, dan platform berbasis web.</p>
-    </div>
+    <div class="card"><h3>Automation</h3><p>Sistem operasional digital.</p></div>
+    <div class="card"><h3>Bot Dev</h3><p>Official Discord Bot Developer.</p></div>
+    <div class="card"><h3>Web Dev</h3><p>Custom Dashboard & Platforms.</p></div>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>
-    📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a><br><br>
-    💬 <a href="https://bit.ly/SBCompany" target="_blank">Discord SkyBridge Company</a>
-  </p>
-</section>
-
-<footer>
-  © 2025 SkyBridge Company — Enterprise Technology
-</footer>
-
 <script>
-let theme="system";
-function toggleTheme(){
-  if(theme==="system"){theme="dark";}
-  else if(theme==="dark"){theme="light";}
-  else{theme="system";}
+// 1. DATABASE SEDERHANA (Simulasi)
+const userDatabase = [
+    {user: "admin", pass: "staff123", role: "staff", name: "Administrator SkyBridge"},
+    {user: "customer1", pass: "sky2025", role: "customer", name: "Budi Santoso"}
+];
 
-  if(theme==="system"){
-    document.documentElement.removeAttribute("data-theme");
-  }else{
-    document.documentElement.setAttribute("data-theme",theme);
-  }
+// 2. FUNGSI UI
+function openLogin() {
+    document.getElementById('loginModal').style.display = 'flex';
+}
+
+function closeLogin() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function attemptLogin() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+
+    // Cari user di database
+    const foundUser = userDatabase.find(user => user.user === u && user.pass === p);
+
+    if (foundUser) {
+        // Simpan sesi di LocalStorage
+        localStorage.setItem('currentUser', JSON.stringify(foundUser));
+        renderDashboard();
+        closeLogin();
+    } else {
+        alert("Username atau password salah!");
+    }
+}
+
+function renderDashboard() {
+    const session = JSON.parse(localStorage.getItem('currentUser'));
+    if (!session) return;
+
+    // Sembunyikan tombol login, ganti jadi nama user
+    document.getElementById('auth-section').innerHTML = `<span>Halo, <b>${session.name}</b></span>`;
+    
+    // Tampilkan panel dashboard
+    document.getElementById('user-area').style.display = 'block';
+    const panelTitle = document.getElementById('panel-title');
+    const panelContent = document.getElementById('panel-content');
+
+    if (session.role === 'staff') {
+        panelTitle.innerText = "Staff Control Center";
+        panelContent.innerHTML = `
+            <p>Status Server: <span style="color:green">Online</span></p>
+            <ul>
+                <li>Kelola Pesanan Kendaraan</li>
+                <li>Audit Log Bot Discord</li>
+                <li>Database Customer</li>
+            </ul>
+        `;
+    } else {
+        panelTitle.innerText = "Customer Dashboard";
+        panelContent.innerHTML = `
+            <p>Selamat datang kembali! Berikut status layanan Anda:</p>
+            <div style="background:white; padding:15px; border-radius:10px; border:1px solid #ddd; margin-top:10px; color:black">
+                <b>Pesanan Aktif:</b> Rental Mobil (Sky-042) <br>
+                <b>Masa Sewa:</b> Hingga 2025-12-30
+            </div>
+        `;
+    }
+}
+
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.reload(); // Refresh halaman untuk reset state
+}
+
+// Cek status login saat halaman dimuat
+window.onload = () => {
+    if (localStorage.getItem('currentUser')) {
+        renderDashboard();
+    }
 }
 </script>
 
