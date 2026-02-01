@@ -102,7 +102,6 @@ nav img{height:42px}
   color: var(--text);
 }
 
-/* Sisa Style Hero & Section (Sama Persis) */
 header{
   background: linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url("https://i.ibb.co.com/RTnVfwF8/image.png");
   background-size:cover; background-position:center; color:#fff; padding:140px 20px;
@@ -111,11 +110,20 @@ header{
 .hero img{width:230px}
 .hero h1{font-size:3.4rem;margin-bottom:15px}
 .hero p{opacity:.9;font-size:1.1rem;margin-bottom:30px}
-.btn{ padding:14px 38px; background:var(--blue); color:#fff; border-radius:999px; font-weight:600; border:none; cursor:pointer;}
+.btn{ padding:14px 38px; background:var(--blue); color:#fff; border-radius:999px; font-weight:600; border:none; cursor:pointer; display:inline-block; text-align:center;}
 section{ max-width:1200px; margin:100px auto; padding:0 20px; }
 h2{ font-size:2.2rem; color:var(--blue-dark); margin-bottom:30px; }
 .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:35px; }
-.card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:40px; transition:.3s; }
+
+/* Menambahkan cursor pointer pada card yang bisa diklik */
+.card-link { cursor: pointer; color: inherit; text-decoration: none; display: block; }
+.card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:40px; transition:.3s; height: 100%; }
+.card:hover{
+  transform:translateY(-8px);
+  border-color:var(--blue);
+  box-shadow:0 15px 40px rgba(30,79,216,.15);
+}
+
 #contact{ background:var(--blue-soft); padding:100px 20px; text-align:center; }
 footer{ background:var(--blue-dark); color:#c7d2fe; text-align:center; padding:35px; }
 @media(max-width:900px){ .hero{grid-template-columns:1fr;text-align:center} }
@@ -173,21 +181,39 @@ footer{ background:var(--blue-dark); color:#c7d2fe; text-align:center; padding:3
 
 <section id="about">
   <h2>About Us</h2>
-  <p>SkyBridge Company adalah perusahaan yang bergerak di bidang marketing, showroom, rental kendaraan, dan homestay premium...</p>
+  <p>SkyBridge Company adalah perusahaan yang bergerak di bidang marketing, showroom, rental kendaraan, dan homestay premium. Didirikan pada tahun 2025, SkyBridge hadir untuk memberikan layanan terpadu yang mengutamakan kualitas, kenyamanan, dan kepercayaan pelanggan.</p>
 </section>
 
 <section id="solutions">
   <h2>Enterprise Solutions</h2>
   <div class="grid">
-    <div class="card"><h3>Automation Systems</h3><p>Sistem otomatis untuk operasional digital.</p></div>
-    <div class="card"><h3>Bot Development</h3><p>Discord bot & service automation.</p></div>
-    <div class="card"><h3>Web Platforms</h3><p>Website & dashboard internal.</p></div>
+    <div class="card">
+      <h3>Automation Systems</h3>
+      <p>Sistem otomatis untuk operasional digital.</p>
+    </div>
+    
+    <a href="https://bit.ly/SkyBridgeApps" target="_blank" class="card-link">
+      <div class="card">
+        <h3>Bot Development</h3>
+        <p>Discord bot & service automation. (Klik untuk melihat aplikasi)</p>
+      </div>
+    </a>
+    
+    <a href="https://bit.ly/SkyBridgeApps" target="_blank" class="card-link">
+      <div class="card">
+        <h3>Web Platforms</h3>
+        <p>Website & dashboard internal. (Klik untuk melihat aplikasi)</p>
+      </div>
+    </a>
   </div>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
-  <p>📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a></p>
+  <p>
+    📧 <a href="mailto:skybridgecompanyjgrp@gmail.com">skybridgecompanyjgrp@gmail.com</a><br><br>
+    💬 <a href="https://bit.ly/SBCompany" target="_blank">Discord SkyBridge Company</a>
+  </p>
 </section>
 
 <footer>© 2025 SkyBridge Company — Enterprise Technology</footer>
@@ -213,18 +239,15 @@ function handleAuth() {
 
   if(!user || !pass) return alert("Isi username dan password!");
 
-  // Ambil data user dari "Database" (LocalStorage)
   let db = JSON.parse(localStorage.getItem('sb_users')) || {};
 
   if (db[user]) {
-    // Jika user ada, cek password
     if (db[user].pass === pass) {
       loginSuccess(user, db[user].role);
     } else {
       alert("Password salah untuk username ini!");
     }
   } else {
-    // Jika user belum ada, buat baru (Password buat sendiri)
     db[user] = { pass: pass, role: role };
     localStorage.setItem('sb_users', JSON.stringify(db));
     loginSuccess(user, role);
@@ -234,7 +257,7 @@ function handleAuth() {
 
 function loginSuccess(user, role) {
   localStorage.setItem('currentUser', JSON.stringify({user, role}));
-  location.reload(); // Refresh untuk update tampilan
+  location.reload();
 }
 
 function logout() {
@@ -242,7 +265,6 @@ function logout() {
   location.reload();
 }
 
-// --- RENDER LOGIC SAAT REFRESH ---
 window.onload = () => {
   const session = JSON.parse(localStorage.getItem('currentUser'));
   if (session) {
@@ -251,7 +273,6 @@ window.onload = () => {
     document.getElementById('welcomeText').innerText = "Welcome, " + session.user;
     document.getElementById('subText').innerText = "Anda masuk sebagai " + session.role.toUpperCase();
     
-    // Tampilkan Dashboard
     const dash = document.getElementById('dashboard');
     const dashContent = document.getElementById('dashContent');
     dash.style.display = 'block';
