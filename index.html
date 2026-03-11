@@ -194,6 +194,31 @@ padding:40px;
 opacity:.7;
 }
 
+/* PRICELIST */
+
+.price-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.price-card{
+padding:30px;
+border-radius:18px;
+background:var(--card);
+border:1px solid var(--border);
+}
+
+.price-card h4{
+color:var(--blue);
+font-size:1.2rem;
+margin-bottom:15px;
+}
+
+.price-card p{
+margin:10px 0;
+}
+
 </style>
 </head>
 
@@ -209,6 +234,7 @@ opacity:.7;
 
 <a href="#about">About</a>
 <a href="#services">Services</a>
+<a href="#pricelist">Pricelist</a>
 <a href="#contact">Contact</a>
 <a onclick="openLogin()">Login</a>
 <a onclick="toggleTheme()">🌓</a>
@@ -296,6 +322,36 @@ kami membangun fondasi digital yang kuat untuk berbagai sektor industri.
 
 </section>
 
+<section id="pricelist">
+
+<h2>Our Pricelist</h2>
+
+<div class="price-grid">
+
+<div class="price-card">
+<h4>Builder Services</h4>
+<p>Flat: $5k - $18k</p>
+<p>Suite: $12k - $23k</p>
+<p>House: $7k - $19k</p>
+</div>
+
+<div class="price-card">
+<h4>Advertising</h4>
+<p>Basic: $45</p>
+<p>Premium: $90</p>
+</div>
+
+<div class="price-card">
+<h4>Rental Services</h4>
+<p>Lorry Truck: $25/day</p>
+<p>Heavy Truck: $40/day</p>
+<p>Boat: $30/day</p>
+</div>
+
+</div>
+
+</section>
+
 <section id="contact">
 
 <h2>Join Our Community</h2>
@@ -377,51 +433,26 @@ function sanitize(input){
 return input.replace(/[<>]/g,"");
 }
 
-/* RATE LIMIT */
-
-let loginAttempts=0;
-
-/* LOGIN SYSTEM */
+/* SIMPLE LOGIN SYSTEM */
 
 function login(){
-
-if(loginAttempts>5){
-
-alert("Too many attempts. Try later.");
-return;
-
-}
 
 let user=sanitize(document.getElementById("username").value);
 let pass=sanitize(document.getElementById("password").value);
 
 if(user.length<3 || pass.length<3){
 
-alert("Invalid input");
+alert("Username and password must be at least 3 characters");
 return;
 
 }
 
-/* FAKE DATABASE */
-
-let dbUser="admin";
-let dbPass="shintae2026";
-
-if(user===dbUser && pass===dbPass){
-
+// Save session
 localStorage.setItem("sessionUser",user);
 
 alert("Login Success");
 
 location.reload();
-
-}else{
-
-loginAttempts++;
-
-alert("Login Failed");
-
-}
 
 }
 
