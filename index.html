@@ -37,6 +37,16 @@ body {
   line-height: 1.7;
 }
 
+/* Particle Background */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
 section {
   max-width: 1100px;
   margin: 60px auto;
@@ -87,12 +97,10 @@ nav ul {
 /* Hero Section */
 header {
   display: flex;
-  background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
-    url("https://images.unsplash.com/photo-1518770660439-4636190af475");
-  background-size: cover;
+  min-height: 100vh;
+  position: relative;
   color: white;
   padding: 30px;
-  min-height: 300px;
 }
 
 .hero-container {
@@ -100,6 +108,8 @@ header {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .forum-sidebar {
@@ -172,16 +182,21 @@ header {
   width: 90%;
   height: 90%;
   object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(45, 107, 255, 0.5));
 }
 
 .hero h1 {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 10px;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
   font-size: 1.1rem;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Buttons */
@@ -548,6 +563,9 @@ footer {
 </nav>
 
 <header>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+  
   <div class="hero-container">
     <div class="forum-sidebar">
       <h3>Community Forum</h3>
@@ -765,7 +783,100 @@ footer {
 <!-- Notification -->
 <div class="notification" id="notification"></div>
 
+<!-- Particles.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+// Initialize Particles.js
+particlesJS("particles-js", {
+  particles: {
+    number: {
+      value: 80,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    },
+    color: {
+      value: "#2d6bff"
+    },
+    shape: {
+      type: "circle",
+      stroke: {
+        width: 0,
+        color: "#000000"
+      },
+      polygon: {
+        nb_sides: 5
+      }
+    },
+    opacity: {
+      value: 0.5,
+      random: false,
+      anim: {
+        enable: false,
+        speed: 1,
+        opacity_min: 0.1,
+        sync: false
+      }
+    },
+    size: {
+      value: 3,
+      random: true,
+      anim: {
+        enable: false,
+        speed: 40,
+        size_min: 0.1,
+        sync: false
+      }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#2d6bff",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 6,
+      direction: "none",
+      random: false,
+      straight: false,
+      out_mode: "out",
+      bounce: false,
+      attract: {
+        enable: false,
+        rotateX: 600,
+        rotateY: 1200
+      }
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse"
+      },
+      onclick: {
+        enable: true,
+        mode: "push"
+      },
+      resize: true
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+        duration: 0.4
+      },
+      push: {
+        particles_nb: 4
+      }
+    }
+  },
+  retina_detect: true
+});
+
 // Mobile Menu Toggle
 function toggleMenu() {
   const navLinks = document.getElementById('navLinks');
@@ -834,21 +945,11 @@ function openTab(evt, tabName) {
 }
 
 // Forum System
-let forumPosts = [
+let forumPosts = JSON.parse(localStorage.getItem("forumPosts")) || [
   {
     author: "Admin",
     message: "Welcome to our community forum! Feel free to ask questions.",
-    date: "2 hours ago"
-  },
-  {
-    author: "JohnDoe",
-    message: "The AI services look amazing! When will the next update be released?",
-    date: "1 hour ago"
-  },
-  {
-    author: "TechEnthusiast",
-    message: "Just signed up for the cloud infrastructure service. Very impressed so far!",
-    date: "45 minutes ago"
+    date: new Date().toLocaleString()
   }
 ];
 
@@ -881,8 +982,10 @@ function postMessage() {
   forumPosts.unshift({
     author: username,
     message: message,
-    date: "just now"
+    date: new Date().toLocaleString()
   });
+  
+  localStorage.setItem("forumPosts", JSON.stringify(forumPosts));
   
   messageInput.value = '';
   loadForumPosts();
