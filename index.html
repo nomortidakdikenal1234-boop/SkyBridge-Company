@@ -1,162 +1,120 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Shin Taeyoung Company</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 body{
+font-family:Arial;
 margin:0;
-font-family:Poppins;
-background:#0b1220;
+background:#f2f4f8;
+}
+
+header{
+background:#0a2a66;
 color:white;
-}
-
-/* NAV */
-
-nav{
-background:#0b1220;
-border-bottom:1px solid #1d4ed8;
-}
-
-nav .container{
 display:flex;
 justify-content:space-between;
+padding:15px 40px;
 align-items:center;
-max-width:1200px;
-margin:auto;
-padding:15px;
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+}
+
+.logo span{
+color:gold;
 }
 
 nav a{
+margin:0 10px;
 color:white;
-margin-left:20px;
-cursor:pointer;
-}
-
-/* HERO */
-
-header{
-height:90vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:linear-gradient(120deg,#0b1220,#1d4ed8);
-}
-
-.hero h1{
-font-size:52px;
-color:#facc15;
-}
-
-.btn{
-padding:12px 30px;
-border:none;
-border-radius:30px;
-background:#facc15;
-color:black;
+text-decoration:none;
 font-weight:bold;
-cursor:pointer;
 }
 
-/* SECTION */
+nav a:hover{
+color:gold;
+}
 
 section{
-max-width:1100px;
-margin:auto;
-padding:70px 20px;
+padding:60px;
+}
+
+h2{
+color:#0a2a66;
+}
+
+.hero{
+background:white;
+padding:60px;
+border-radius:10px;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
 .card{
-background:#111827;
+background:white;
 padding:20px;
 border-radius:10px;
-margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
-
-.card img{
-width:100%;
-border-radius:8px;
-margin-top:10px;
-}
-
-/* STAFF */
 
 .staff-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:20px;
 }
 
 .staff{
-background:#111827;
+text-align:center;
+background:white;
 padding:20px;
 border-radius:10px;
-text-align:center;
 }
 
 .staff img{
 width:100%;
-border-radius:8px;
+border-radius:10px;
 }
 
-.best{
-border:3px solid gold;
-}
-
-/* ADMIN */
-
-.admin-panel{
-display:none;
-background:#111827;
-padding:20px;
-}
-
-.admin-panel input{
-width:100%;
-padding:10px;
-margin:5px 0;
-}
-
-/* CHAT */
-
-.chat-toggle{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#facc15;
-color:black;
-padding:15px;
-border-radius:40px;
+.tabs button{
+padding:10px 20px;
+border:none;
+background:#0a2a66;
+color:white;
+margin-right:5px;
 cursor:pointer;
+}
+
+.tab{
+display:none;
+margin-top:20px;
 }
 
 .chatbox{
 position:fixed;
-bottom:80px;
+bottom:20px;
 right:20px;
-width:420px;
-height:520px;
-background:#111827;
+width:320px;
+background:white;
 border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
 display:none;
 flex-direction:column;
 }
 
-.chat-header{
-background:#1d4ed8;
-padding:10px;
-}
-
 .chat-messages{
-flex:1;
+height:200px;
 overflow-y:auto;
 padding:10px;
 }
@@ -169,145 +127,116 @@ display:flex;
 flex:1;
 padding:10px;
 border:none;
+border-top:1px solid #ccc;
 }
 
 .chat-input button{
-background:#facc15;
+background:#0a2a66;
+color:white;
 border:none;
 padding:10px;
 }
 
-/* PRICELIST */
-
-.ad-pricing,.rental-pricing,.builder-pricing{
-background:#111827;
-padding:30px;
+.login-box{
+background:white;
+padding:20px;
+max-width:300px;
 border-radius:10px;
 }
 
-.ad-tier,.rental-tier{
-margin-bottom:20px;
-border-bottom:1px solid #333;
-padding-bottom:15px;
-}
-
-.tab-content{
-display:none;
-}
-
-.tab-content.active{
-display:block;
-}
-
-.tab-nav{
-display:flex;
-gap:10px;
-margin-bottom:20px;
-}
-
-.tab-button{
-padding:10px 15px;
-border:none;
-background:#1d4ed8;
-color:white;
-cursor:pointer;
-}
-
-#pricelist,#rental,#builder{
-display:none;
-}
-
 </style>
+
 </head>
 
 <body>
 
+<header>
+
+<div class="logo">
+신태영 <span>Shin Taeyoung Company</span>
+</div>
+
 <nav>
-
-<div class="container">
-
-<b style="color:#facc15">Shin Taeyoung Company</b>
-
-<div>
-<a onclick="showPricelist()">Pricelist</a>
-<a onclick="login()">Login</a>
-</div>
-
-</div>
-
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#pricelist">Pricelist</a>
+<a href="#testimonial">Testimonial</a>
+<a href="#announcement">Announcement</a>
+<a href="#structure">Structure</a>
+<a href="#login">Login</a>
 </nav>
 
-<header>
+</header>
+
+
+<section id="home">
 
 <div class="hero">
 
 <h1>Shin Taeyoung Company</h1>
+
 <p>Beyond Innovation. Beyond Technology. Beyond Limits.</p>
 
-<br>
-
-<button class="btn" onclick="showPricelist()">ALL PRICELIST / SERVICE</button>
+<button onclick="openChat()">Open Chat</button>
 
 </div>
 
-</header>
+</section>
 
-<section>
 
-<h2>Announcement</h2>
+<section id="services">
 
-<div id="announcementContainer"></div>
+<h2>Services</h2>
+
+<div class="services">
+
+<div class="card">
+<h3>Advertising</h3>
+<p>Professional promotional advertising service.</p>
+</div>
+
+<div class="card">
+<h3>Builder</h3>
+<p>Construction and development service.</p>
+</div>
+
+<div class="card">
+<h3>Vehicle Showroom</h3>
+<p>Vehicle display and showcase service.</p>
+</div>
+
+<div class="card">
+<h3>Rental</h3>
+<p>Transportation and logistics rental service.</p>
+</div>
+
+<div class="card">
+<h3>Homestay</h3>
+<p>Luxury apartment accommodation service.</p>
+</div>
+
+</div>
 
 </section>
 
-<section>
 
-<h2>Structure Staff</h2>
 
-<div id="staffContainer" class="staff-grid"></div>
+<section id="pricelist">
 
-</section>
+<h2>Pricelist</h2>
 
-<section>
+<div class="tabs">
 
-<h2>Best Staff Of The Week</h2>
-
-<div id="bestStaffContainer" class="staff-grid"></div>
-
-</section>
-
-<div class="admin-panel" id="adminPanel">
-
-<h2>Admin Panel</h2>
-
-<h3>Announcement</h3>
-
-<input id="announceText" placeholder="text">
-
-<input type="file" id="announceImg">
-
-<button onclick="addAnnouncement()">Post</button>
-
-<h3>Add Staff</h3>
-
-<input id="staffName" placeholder="name">
-
-<input id="staffRole" placeholder="role">
-
-<input type="file" id="staffImg">
-
-<label>
-
-<input type="checkbox" id="bestCheck"> Best Staff
-
-</label>
-
-<button onclick="addStaff()">Add Staff</button>
+<button onclick="openTab('ads')">Advertising</button>
+<button onclick="openTab('rental')">Rental</button>
+<button onclick="openTab('builder')">Builder</button>
+<button onclick="openTab('homestay')">Homestay</button>
+<button onclick="openTab('showroom')">Vehicle Showroom</button>
 
 </div>
 
 
-<!-- PRICELIST TIDAK DIUBAH -->
+<div id="ads" class="tab">
 
 <section id="pricelist">
   <h2>Advertisement Pricelist</h2>
@@ -342,6 +271,11 @@ display:none;
   </div>
 </section>
 
+</div>
+
+
+<div id="rental" class="tab">
+
 <section id="rental">
   <h2>Vehicle Rental Pricelist</h2>
   <div class="rental-pricing">
@@ -373,18 +307,22 @@ display:none;
   </div>
 </section>
 
+</div>
+
+
+<div id="builder" class="tab">
+
 <section id="builder">
   <h2>Builder Pricelist</h2>
   <div class="builder-pricing">
-
     <div class="tab-nav">
-      <button onclick="openTab(event,'tab1')" class="tab-button active">Flat</button>
-      <button onclick="openTab(event,'tab2')" class="tab-button">Suite</button>
-      <button onclick="openTab(event,'tab3')" class="tab-button">House</button>
-      <button onclick="openTab(event,'tab4')" class="tab-button">House (Extended)</button>
+      <button onclick="openBuilder('tab1')">Flat</button>
+      <button onclick="openBuilder('tab2')">Suite</button>
+      <button onclick="openBuilder('tab3')">House</button>
+      <button onclick="openBuilder('tab4')">House (Extended)</button>
     </div>
 
-    <div id="tab1" class="tab-content active">
+    <div id="tab1" class="buildertab">
       <h3>FLAT</h3>
       <ul>
         <li>LOW TYPE : <strong>$5,000 - $7,000</strong></li>
@@ -395,7 +333,7 @@ display:none;
       </ul>
     </div>
 
-    <div id="tab2" class="tab-content">
+    <div id="tab2" class="buildertab">
       <h3>SUITE</h3>
       <ul>
         <li>UNITY : <strong>$12,000 - $21,000</strong></li>
@@ -405,7 +343,7 @@ display:none;
       </ul>
     </div>
 
-    <div id="tab3" class="tab-content">
+    <div id="tab3" class="buildertab">
       <h3>HOUSE</h3>
       <ul>
         <li>2 ROOMS : <strong>$7,000 - $8,000</strong></li>
@@ -416,7 +354,7 @@ display:none;
       </ul>
     </div>
 
-    <div id="tab4" class="tab-content">
+    <div id="tab4" class="buildertab">
       <h3>HOUSE (EXTENDED)</h3>
       <ul>
         <li>4 ROOMS (ROCKSHORE) : <strong>$15,000</strong></li>
@@ -430,17 +368,120 @@ display:none;
   </div>
 </section>
 
-<div class="chat-toggle" onclick="toggleChat()">CHAT</div>
+</div>
+
+
+<div id="homestay" class="tab">
+
+<div class="card">
+
+<h3>Homestay Apartment</h3>
+
+<p>$500 - $600 / Weeks</p>
+
+</div>
+
+</div>
+
+
+<div id="showroom" class="tab">
+
+<div class="card">
+
+<h3>Vehicle Showroom</h3>
+
+<p>Custom Price</p>
+
+<p>Harga tergantung jumlah kendaraan dan pemesanan.</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="testimonial">
+
+<h2>Testimonial</h2>
+
+<div id="testilist"></div>
+
+<input id="testiname" placeholder="Nama">
+<input id="testitext" placeholder="Pesan">
+
+<button onclick="sendTesti()">Kirim</button>
+
+</section>
+
+
+
+<section id="announcement">
+
+<h2>Announcement</h2>
+
+<div id="announceList"></div>
+
+<div id="adminannounce" style="display:none">
+
+<input id="announceText" placeholder="Announcement">
+<input type="file" id="announceImg">
+
+<button onclick="sendAnnouncement()">Post</button>
+
+</div>
+
+</section>
+
+
+
+<section id="structure">
+
+<h2>Structure Staff</h2>
+
+<div class="staff-grid" id="staffGrid">
+
+</div>
+
+<div id="adminstaff" style="display:none">
+
+<input id="staffname" placeholder="Nama">
+<input id="staffrole" placeholder="Role">
+<input type="file" id="staffimg">
+
+<button onclick="addStaff()">Add</button>
+
+</div>
+
+</section>
+
+
+
+<section id="login">
+
+<div class="login-box">
+
+<h2>Login</h2>
+
+<input id="user">
+<input id="pass" type="password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+</section>
+
+
 
 <div class="chatbox" id="chatbox">
 
-<div class="chat-header">Community Chat</div>
-
-<div class="chat-messages" id="chatMessages"></div>
+<div class="chat-messages" id="chatmsg"></div>
 
 <div class="chat-input">
 
-<input id="chatText">
+<input id="chatinput">
 
 <button onclick="sendChat()">Send</button>
 
@@ -448,140 +489,139 @@ display:none;
 
 </div>
 
+
+
 <script>
+
+let username="Guest"
+let admin=false
 
 function login(){
 
-let u=prompt("username")
-let p=prompt("password")
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
 
-if(u==="admin" && p==="shintaeyoung"){
-document.getElementById("adminPanel").style.display="block"
+username=u
+
+if(u=="admin" && p=="shintaeyoung"){
+
+admin=true
+alert("Admin login")
+
+document.getElementById("adminannounce").style.display="block"
+document.getElementById("adminstaff").style.display="block"
+
+}else{
+
+alert("User login")
+
 }
 
 }
 
-function addAnnouncement(){
+function openTab(id){
+
+document.querySelectorAll(".tab").forEach(t=>t.style.display="none")
+
+document.getElementById(id).style.display="block"
+
+}
+
+function openBuilder(id){
+
+document.querySelectorAll(".buildertab").forEach(t=>t.style.display="none")
+
+document.getElementById(id).style.display="block"
+
+}
+
+function sendTesti(){
+
+let name=document.getElementById("testiname").value
+let text=document.getElementById("testitext").value
+
+let div=document.createElement("div")
+div.className="card"
+div.innerHTML="<b>"+name+"</b><p>"+text+"</p>"
+
+document.getElementById("testilist").appendChild(div)
+
+}
+
+function sendAnnouncement(){
+
+if(!admin)return
 
 let text=document.getElementById("announceText").value
-let img=document.getElementById("announceImg").files[0]
+let file=document.getElementById("announceImg").files[0]
 
-let card=document.createElement("div")
-card.className="card"
-card.innerHTML=text
+let div=document.createElement("div")
+div.className="card"
 
-if(img){
+div.innerHTML="<p>"+text+"</p>"
+
+if(file){
 
 let reader=new FileReader()
 
 reader.onload=function(){
 
-let image=document.createElement("img")
-image.src=reader.result
-card.appendChild(image)
+let img=document.createElement("img")
+img.src=reader.result
+img.style.width="100%"
+
+div.appendChild(img)
 
 }
 
-reader.readAsDataURL(img)
+reader.readAsDataURL(file)
 
 }
 
-let del=document.createElement("button")
-del.innerText="Delete"
-del.onclick=()=>card.remove()
-
-card.appendChild(del)
-
-document.getElementById("announcementContainer").prepend(card)
+document.getElementById("announceList").appendChild(div)
 
 }
 
 function addStaff(){
 
-let name=document.getElementById("staffName").value
-let role=document.getElementById("staffRole").value
-let img=document.getElementById("staffImg").files[0]
-let best=document.getElementById("bestCheck").checked
+if(!admin)return
 
-let card=document.createElement("div")
-card.className="staff"
-card.innerHTML="<h3>"+name+"</h3><p>"+role+"</p>"
+let name=document.getElementById("staffname").value
+let role=document.getElementById("staffrole").value
+let file=document.getElementById("staffimg").files[0]
 
-if(img){
+let div=document.createElement("div")
+div.className="staff"
 
 let reader=new FileReader()
 
 reader.onload=function(){
 
-let image=document.createElement("img")
-image.src=reader.result
-card.appendChild(image)
+div.innerHTML="<img src='"+reader.result+"'><h3>"+name+"</h3><p>"+role+"</p>"
 
 }
 
-reader.readAsDataURL(img)
+reader.readAsDataURL(file)
+
+document.getElementById("staffGrid").appendChild(div)
 
 }
 
-let del=document.createElement("button")
-del.innerText="Delete"
-del.onclick=()=>card.remove()
+function openChat(){
 
-card.appendChild(del)
-
-if(best){
-
-card.classList.add("best")
-document.getElementById("bestStaffContainer").appendChild(card)
-
-}else{
-
-document.getElementById("staffContainer").appendChild(card)
-
-}
-
-}
-
-function toggleChat(){
-
-let c=document.getElementById("chatbox")
-
-c.style.display=c.style.display==="flex"?"none":"flex"
+document.getElementById("chatbox").style.display="flex"
 
 }
 
 function sendChat(){
 
-let text=document.getElementById("chatText").value
+let text=document.getElementById("chatinput").value
 
 let msg=document.createElement("div")
-msg.innerText=text
 
-document.getElementById("chatMessages").appendChild(msg)
+msg.innerText=username+" : "+text
 
-}
-
-function showPricelist(){
-
-document.getElementById("pricelist").style.display="block"
-document.getElementById("rental").style.display="block"
-document.getElementById("builder").style.display="block"
-
-window.location="#pricelist"
-
-}
-
-function openTab(evt,tab){
-
-let contents=document.querySelectorAll(".tab-content")
-let buttons=document.querySelectorAll(".tab-button")
-
-contents.forEach(c=>c.classList.remove("active"))
-buttons.forEach(b=>b.classList.remove("active"))
-
-document.getElementById(tab).classList.add("active")
-
-evt.currentTarget.classList.add("active")
+document.getElementById("chatmsg").appendChild(msg)
 
 }
 
@@ -589,3 +629,4 @@ evt.currentTarget.classList.add("active")
 
 </body>
 </html>
+```
