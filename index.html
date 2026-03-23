@@ -10,62 +10,77 @@
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat',sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        /* LOGIN SCREEN (Desain Antares Group) */
+        /* ANIMASI */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        /* LOGIN SCREEN ANTARES STYLE */
         #login-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: #f4f7fe; z-index: 9999; display: flex; align-items: center; justify-content: center;
         }
         .login-card { 
-            width: 380px; padding: 45px; background: #fff; border-radius: 15px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05); text-align: center; color: #333;
+            width: 400px; padding: 40px; background: #fff; border-radius: 20px; 
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1); text-align: center; color: #333;
         }
-        .login-card h2 { font-weight: 900; color: #111; margin-bottom: 5px; font-size: 22px; }
-        .login-card p { font-size: 11px; color: #777; margin-bottom: 25px; letter-spacing: 0.5px; }
-        .login-card input { 
-            width: 100%; padding: 14px 18px; margin-bottom: 15px; 
-            border: 1px solid #eee; border-radius: 10px; outline: none; transition: 0.3s; background: #fdfdfd;
+        .login-card h2 { font-weight: 900; color: #111; margin-bottom: 5px; }
+        .login-card p { font-size: 12px; color: #777; margin-bottom: 25px; }
+        
+        .btn-google {
+            width: 100%; padding: 12px; background: #fff; color: #444; border: 1px solid #ddd;
+            border-radius: 10px; font-weight: 700; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; transition: 0.3s;
         }
-        .login-card input:focus { border-color: var(--blue-btn); background: #fff; }
-        .login-card button { 
-            width: 100%; padding: 14px; background: var(--blue-btn); color: #fff; 
+        .btn-google:hover { background: #f8f9ff; border-color: var(--blue-btn); }
+        .btn-google img { width: 18px; }
+
+        .divider { display: flex; align-items: center; margin: 20px 0; color: #ccc; font-size: 11px; }
+        .divider::before, .divider::after { content: ""; flex: 1; border-bottom: 1px solid #eee; margin: 0 10px; }
+
+        input { 
+            width: 100%; padding: 12px 15px; margin-bottom: 15px; 
+            border: 1px solid #eee; border-radius: 10px; outline: none; transition: 0.3s; background: #fafafa;
+        }
+        input:focus { border-color: var(--blue-btn); background: #fff; }
+        
+        .btn-main { 
+            width: 100%; padding: 12px; background: var(--blue-btn); color: #fff; 
             border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s;
         }
-        .login-card button:hover { background: #4752c4; transform: translateY(-2px); }
+        .btn-main:hover { background: #4752c4; transform: translateY(-2px); }
 
         /* MAIN UI */
         #main-wrapper { display: none; }
-        header { background: #040d1a; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--y); position: sticky; top: 0; z-index: 1000; }
+        header { background: #040d1a; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--y); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 900; font-size: 18px; letter-spacing: 2px; }
         .logo span { color: var(--y); }
-        
-        nav { display: flex; gap: 8px; flex-wrap: wrap; }
-        nav button { background: none; border: 1px solid transparent; color: #fff; padding: 8px 15px; cursor: pointer; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; transition: 0.3s; }
-        nav button.active { background: var(--y); color: #000; border-color: var(--y); }
+        nav { display: flex; gap: 5px; }
+        nav button { background: none; border: 1px solid transparent; color: #fff; padding: 8px 12px; cursor: pointer; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 5px; transition: 0.3s; }
+        nav button.active { background: var(--y); color: #000; }
 
-        /* SECTION & GRID */
-        section { padding: 50px 8%; display: none; animation: fadeIn 0.5s ease; }
+        /* CONTENT */
+        section { padding: 60px 8%; display: none; min-height: 85vh; animation: fadeUp 0.6s ease; }
         section.active { display: block; }
-        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+        h2.title { text-align: center; color: var(--y); font-size: 24px; font-weight: 900; letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; }
         
-        h2.title { text-align: center; color: var(--y); letter-spacing: 3px; margin-bottom: 40px; font-weight: 900; text-transform: uppercase; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 12px; text-align: center; transition: 0.3s; backdrop-filter: blur(10px); }
-        .card:hover { border-color: var(--y); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
-        .price { font-size: 26px; font-weight: 900; color: var(--y); margin: 15px 0; display: block; }
+        .card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; text-align: center; backdrop-filter: blur(10px); transition: 0.3s; }
+        .card:hover { border-color: var(--y); transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
         
+        .price-tag { font-size: 28px; font-weight: 900; color: var(--y); margin: 15px 0; display: block; }
         ul { list-style: none; text-align: left; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 11px; }
-        li { margin-bottom: 8px; display: flex; justify-content: space-between; }
-        li b { color: var(--y); font-weight: 700; }
+        li { margin-bottom: 10px; display: flex; justify-content: space-between; }
+        li b { color: var(--y); }
 
         /* CHATBOX */
-        .chat-container { position: fixed; bottom: 20px; right: 20px; width: 300px; border: 2px solid var(--y); border-radius: 15px; overflow: hidden; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 1000; }
+        .chat-ui { position: fixed; bottom: 20px; right: 20px; width: 300px; border: 2px solid var(--y); border-radius: 15px; overflow: hidden; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 2000; animation: slideIn 0.5s ease; }
         .chat-h { background: #000; color: var(--y); padding: 12px; font-weight: 900; text-align: center; font-size: 11px; }
-        #chat-content { height: 180px; overflow-y: auto; padding: 15px; background: #fdfdfd; color: #333; font-size: 11px; display: flex; flex-direction: column; gap: 8px; }
-        .msg { background: #fff; padding: 10px; border-radius: 8px; border-left: 4px solid var(--y); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .msg b { color: #555; display: block; font-size: 9px; text-transform: uppercase; margin-bottom: 2px; border-bottom: 1px solid #eee; padding-bottom: 2px; }
+        #chat-logs { height: 200px; overflow-y: auto; padding: 15px; background: #f9f9f9; color: #333; font-size: 11px; display: flex; flex-direction: column; gap: 8px; }
+        .msg-box { background: #fff; padding: 10px; border-radius: 8px; border-left: 4px solid var(--y); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .msg-box b { color: var(--blue-btn); display: block; font-size: 9px; text-transform: uppercase; }
         .chat-f { display: flex; padding: 10px; background: #fff; border-top: 1px solid #eee; }
-        .chat-f input { flex: 1; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; outline: none; font-size: 11px; }
-        .chat-f button { background: #000; color: var(--y); border: none; width: 35px; height: 35px; border-radius: 50%; margin-left: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .chat-f input { flex: 1; margin: 0; padding: 8px 15px; border-radius: 20px; font-size: 11px; }
+        .chat-f button { background: #000; color: var(--y); border: none; width: 35px; height: 35px; border-radius: 50%; margin-left: 5px; cursor: pointer; }
     </style>
 </head>
 
@@ -74,10 +89,24 @@
 <div id="login-overlay">
     <div class="login-card">
         <h2 style="color: var(--blue-btn)">Shin Taeyoung Co.</h2>
-        <p>Sign in to account</p>
-        <input type="text" id="user-in" placeholder="Input Username">
-        <button onclick="login()">Sign In</button>
-        <p style="margin-top: 15px; opacity: 0.6; font-size: 9px;">Powered by Shin Taeyoung Company</p>
+        <p>Sign in to your account</p>
+        
+        <div id="step-1">
+            <button class="btn-google" onclick="goStep2()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+                Sign in with Google
+            </button>
+            <div class="divider">ATAU GUEST</div>
+            <input type="text" id="guest-name" placeholder="Nama Guest">
+            <button class="btn-main" onclick="loginGuest()">Masuk Sebagai Tamu</button>
+        </div>
+
+        <div id="step-2" style="display:none">
+            <input type="text" id="reg-user" placeholder="Buat Username">
+            <input type="password" id="reg-pass" placeholder="Buat Password">
+            <button class="btn-main" onclick="finalizeLogin()">Create & Login</button>
+            <p onclick="location.reload()" style="margin-top:10px; cursor:pointer; font-size:10px; color:var(--blue-btn)">Kembali</p>
+        </div>
     </div>
 </div>
 
@@ -96,18 +125,9 @@
     <section id="ads" class="active">
         <h2 class="title">ADVERTISEMENT</h2>
         <div class="grid">
-            <div class="card"><h3>BASIC</h3><span class="price">$50/ADS</span><ul><li>Watermark <b>Include</b></li><li>Fast Service <b>YES</b></li></ul></div>
-            <div class="card"><h3>PREMIUM</h3><span class="price">$90/ADS</span><ul><li>Watermark <b>NO</b></li><li>Fast Service <b>YES</b></li><li>Broadcast <b>YES</b></li></ul></div>
-            <div class="card"><h3>UNLIMITED</h3><span class="price">$100/ADS</span><ul><li>Watermark Req <b>FREE</b></li><li>Broadcast <b>YES</b></li></ul></div>
-        </div>
-    </section>
-
-    <section id="rental">
-        <h2 class="title">VEHICLE RENTAL</h2>
-        <div class="grid">
-            <div class="card"><h3>BENSON</h3><span class="price">$20/CRATE</span><ul><li>Padlock <b>$345</b></li><li>Insurance <b>$500</b></li></ul></div>
-            <div class="card"><h3>ROADTRAIN</h3><span class="price">$30/TRAILER</span><ul><li>Padlock <b>$560</b></li><li>Insurance <b>$1.000</b></li></ul></div>
-            <div class="card"><h3>BOAT</h3><span class="price">$22/HOURS</span><ul><li>Padlock <b>$520</b></li><li>Insurance <b>$734</b></li></ul></div>
+            <div class="card"><h3>BASIC</h3><span class="price-tag">$50/ADS</span><ul><li>Watermark <b>Include</b></li><li>Fast Service <b>YES</b></li></ul></div>
+            <div class="card"><h3>PREMIUM</h3><span class="price-tag">$90/ADS</span><ul><li>Watermark <b>NO</b></li><li>Fast Service <b>YES</b></li><li>Broadcast <b>YES</b></li></ul></div>
+            <div class="card"><h3>UNLIMITED</h3><span class="price-tag">$100/ADS</span><ul><li>Custom Req <b>FREE</b></li><li>Broadcast <b>YES</b></li></ul></div>
         </div>
     </section>
 
@@ -127,56 +147,51 @@
             <div class="card">
                 <h3>SUITE TYPE</h3>
                 <ul>
-                    <li>Unity <b>$12.000 - $21.000</b></li>
-                    <li>Temple <b>$12.000 - $21.000</b></li>
-                    <li>Rodeo <b>$14.000 - $22.000</b></li>
-                    <li>Glenpark <b>$14.000 - $23.000</b></li>
+                    <li>Unity / Temple <b>$12k - $21k</b></li>
+                    <li>Rodeo / Glenpark <b>$14k - $23k</b></li>
                 </ul>
             </div>
             <div class="card">
                 <h3>HOUSE TYPE</h3>
                 <ul>
-                    <li>2 Rooms <b>$7.000 - $8.000</b></li>
-                    <li>3 Rooms <b>$8.000 - $13.000</b></li>
-                    <li>4 Rooms <b>$13.000 - $17.000</b></li>
-                    <li>3 Rooms (Palomino) <b>$13.000</b></li>
-                    <li>4 Rooms (Palomino) <b>$17.000</b></li>
+                    <li>2-4 Rooms <b>$7k - $17k</b></li>
+                    <li>Palomino (3-4 R) <b>$13k - $17k</b></li>
+                    <li>Rockshore (4-5 R) <b>$15k - $19k</b></li>
+                    <li>Big House (6-8 R) <b>$17.5k - $20k</b></li>
                 </ul>
             </div>
-            <div class="card">
-                <h3>EXTENDED HOUSE</h3>
-                <ul>
-                    <li>4 Rooms (Rockshore) <b>$15.000</b></li>
-                    <li>5 Rooms (Rockshore) <b>$19.000</b></li>
-                    <li>5 Rooms <b>$16.000</b></li>
-                    <li>6 Rooms <b>$17.500</b></li>
-                    <li>8 Rooms <b>$20.000</b></li>
-                </ul>
-            </div>
+        </div>
+    </section>
+
+    <section id="rental">
+        <h2 class="title">VEHICLE RENTAL</h2>
+        <div class="grid">
+            <div class="card"><h3>BENSON</h3><span class="price-tag">$20/C</span><ul><li>Padlock <b>$345</b></li><li>Insurance <b>$500</b></li></ul></div>
+            <div class="card"><h3>ROADTRAIN</h3><span class="price-tag">$30/T</span><ul><li>Padlock <b>$560</b></li><li>Insurance <b>$1.000</b></li></ul></div>
         </div>
     </section>
 
     <section id="home">
         <h2 class="title">HOMESTAY</h2>
         <div class="grid">
-            <div class="card"><h3>Apartment</h3><span class="price">$500 - $600</span><p>Lokasi strategis dan nyaman.</p></div>
+            <div class="card"><h3>Apartment</h3><span class="price-tag">$500 - $600</span><p>Per Weeks / Lokasi Nyaman</p></div>
         </div>
     </section>
 
     <section id="show">
-        <h2 class="title">VEHICLE SHOWROOM</h2>
+        <h2 class="title">SHOWROOM</h2>
         <div class="grid">
-            <div class="card"><h3>Custom Showroom</h3><span class="price">CUSTOM PRICE</span><p>Harga menyesuaikan jumlah kendaraan.</p></div>
+            <div class="card"><h3>Custom Showroom</h3><span class="price-tag">CUSTOM</span><p>Harga Sesuai Pesanan.</p></div>
         </div>
     </section>
 </div>
 
-<div class="chat-container">
-    <div class="chat-h">COMMUNITY CHAT</div>
-    <div id="chat-content"></div>
+<div class="chat-ui">
+    <div class="chat-h">GLOBAL COMMUNITY CHAT</div>
+    <div id="chat-logs"></div>
     <div class="chat-f">
-        <input id="ci" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter') msg()">
-        <button onclick="msg()">➤</button>
+        <input id="chat-in" placeholder="Tulis pesan..." onkeypress="if(event.key==='Enter') send()">
+        <button onclick="send()">➤</button>
     </div>
 </div>
 
@@ -186,14 +201,33 @@
     const cfg = { apiKey: "AIzaSyCpDAf9D2Bv31pnqRIjffL-E9IAP8SqTTy", authDomain: "shin-taeyoung-website.firebaseapp.com", databaseURL: "https://shin-taeyoung-website-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "shin-taeyoung-website", storageBucket: "shin-taeyoung-website.firebasestorage.app", messagingSenderId: "313549044765", appId: "1:313549044765:web:f8e31a68cb677bcfb81af4" };
     firebase.initializeApp(cfg); const db = firebase.database();
     
-    let userAktif = "";
+    let activeUser = "";
 
-    function login() {
-        const u = document.getElementById("user-in").value.trim();
-        if(u.length < 2) return alert("Isi nama kamu dulu Rul!");
-        userAktif = u;
+    function goStep2() {
+        document.getElementById("step-1").style.display = "none";
+        document.getElementById("step-2").style.display = "block";
+    }
+
+    function finalizeLogin() {
+        const u = document.getElementById("reg-user").value.trim();
+        const p = document.getElementById("reg-pass").value.trim();
+        if(u.length < 3) return alert("Username minimal 3 huruf!");
+        activeUser = u;
+        db.ref("users/" + u).set({ password: p });
+        enterApp();
+    }
+
+    function loginGuest() {
+        const u = document.getElementById("guest-name").value.trim();
+        if(!u) return alert("Isi nama kamu!");
+        activeUser = u + " (Guest)";
+        enterApp();
+    }
+
+    function enterApp() {
         document.getElementById("login-overlay").style.display = "none";
         document.getElementById("main-wrapper").style.display = "block";
+        db.ref("global_chats").push({ user: "SYSTEM", text: activeUser + " has joined the company portal." });
     }
 
     function st(id, btn) {
@@ -203,17 +237,19 @@
         btn.classList.add('active');
     }
 
-    function msg() {
-        const i = document.getElementById("ci");
+    function send() {
+        const i = document.getElementById("chat-in");
         if(!i.value.trim()) return;
-        db.ref("global_chats").push({ user: userAktif, text: i.value });
+        db.ref("global_chats").push({ user: activeUser, text: i.value });
         i.value = "";
     }
 
-    db.ref("global_chats").limitToLast(12).on("value", snap => {
-        const c = document.getElementById("chat-content"); let h = "";
-        snap.forEach(s => { h += `<div class="msg"><b>${s.val().user}</b> ${s.val().text}</div>`; });
-        c.innerHTML = h; c.scrollTop = c.scrollHeight;
+    db.ref("global_chats").limitToLast(15).on("value", snap => {
+        const logs = document.getElementById("chat-logs"); let html = "";
+        snap.forEach(s => { 
+            html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; 
+        });
+        logs.innerHTML = html; logs.scrollTop = logs.scrollHeight;
     });
 </script>
 </body>
