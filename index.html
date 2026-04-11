@@ -234,26 +234,28 @@
     </section>
 
 <section id="show">
-    <h2 class="title">OUR SHOWROOM</h2>
-    
-    <div style="display: flex; justify-content: center; padding: 0 20px;">
-        <div class="card">
-            <img src="https://i.ibb.co.com/nNjxQPxd/image.png" class="show-img" alt="Showroom Preview">
+        <h2 class="title">OUR SHOWROOM</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; padding: 20px;">
             
-            <h3 style="font-size: 20px; margin-bottom: 10px;">MODERN CLASSIC</h3>
-            <span class="price-tag" style="font-size: 18px; padding: 5px 20px;">CUSTOM</span>
-            
-            <p style="font-size: 13px; color: #ccc; margin-top: 15px; line-height: 1.6;">
-                Desain showroom elegan dengan konsep pencahayaan modern <br> 
-                untuk menampilkan koleksi kendaraan mewah anda secara maksimal.
-            </p>
-            
-            <button class="btn-main" style="width: 100%; margin-top: 20px; padding: 12px;" onclick="sendChat('Halo, saya ingin konsultasi Showroom Modern Classic')">
-                MULAI KONSULTASI
-            </button>
+            <div class="card">
+                <img src="https://i.ibb.co.com/nNjxQPxd/image.png" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid var(--y); margin-bottom: 15px;" alt="Showroom 1">
+                <h3>MODERN CLASSIC</h3>
+                <span class="price-tag">CUSTOM</span>
+                <p style="font-size: 11px; color: #aaa; margin: 10px 0;">Desain showroom elegan dengan konsep pencahayaan modern.</p>
+                <button class="btn-main" style="width: 100%;" onclick="sendChat('Halo, saya ingin tanya jasa Showroom Modern Classic')">KONSULTASI</button>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/whzGw4NR/image.png" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid var(--y); margin-bottom: 15px;" alt="Showroom 2">
+                <h3>OFFICE SHOWROOM</h3>
+                <span class="price-tag">CUSTOM</span>
+                <p style="font-size: 11px; color: #aaa; margin: 10px 0;">Kombinasi ruang kerja profesional dengan display kendaraan mewah.</p>
+                <button class="btn-main" style="width: 100%;" onclick="sendChat('Halo, saya ingin tanya jasa Office Showroom')">KONSULTASI</button>
+            </div>
+
         </div>
-    </div>
-</section>
+    </section>
 
 </div> <div class="chat-ui">
     <div class="chat-h">GLOBAL COMMUNITY CHAT</div>
