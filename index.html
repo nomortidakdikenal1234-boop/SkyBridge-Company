@@ -360,56 +360,36 @@
         messagingSenderId: "313549044765", 
         appId: "1:313549044765:web:f8e31a68cb677bcfb81af4" 
     };
-    firebase.initializeApp(cfg); 
+    if (!firebase.apps.length) { firebase.initializeApp(cfg); }
     const db = firebase.database();
     let activeUser = "";
 
-    // 2. FUNGSI NAVIGASI DASHBOARD (ADS, RENTAL, PARTNER, DLL)
-    function st(sectionId, btn) {
-        // Sembunyikan semua section
-        document.querySelectorAll('#main-wrapper section').forEach(section => {
-            section.style.display = 'none';
-            section.classList.remove('active');
-        });
-
-        // Munculkan yang dipilih
-        const target = document.getElementById(sectionId);
-        if (target) {
-            target.style.display = 'block';
-            target.classList.add('active');
-        }
-
-        // Tombol Kuning
-        document.querySelectorAll('nav button').forEach(button => {
-            button.classList.remove('active');
-        });
-        if(btn) btn.classList.add('active');
-    }
-
-    // 3. FUNGSI LOGIN & AUTH
+    // 2. FUNGSI LOGIN (HANYA SATU SAJA)
     function goStep2() {
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
+        const s1 = document.getElementById('step-1');
+        const s2 = document.getElementById('step-2');
+        if(s1 && s2) {
+            s1.style.display = 'none';
+            s2.style.display = 'block';
+            console.log("Pindah ke Step 2 aman");
+        } else {
+            console.error("Elemen step-1 atau step-2 gak ketemu!");
+        }
     }
 
     function handleAuth() {
         const u = document.getElementById("auth-user").value.trim();
         const p = document.getElementById("auth-pass").value.trim();
         if(u.length < 3 || p.length < 4) return alert("Username min 3, Password min 4!");
-
         db.ref("users/" + u).once("value", (snap) => {
             if (snap.exists()) {
                 if (snap.val().password === p) {
-                    activeUser = u; 
-                    sessionStorage.setItem("st_user", u);
-                    enterApp(true); 
+                    activeUser = u; sessionStorage.setItem("st_user", u); enterApp(true);
                 } else { alert("Sandi salah!"); }
             } else {
                 if(confirm("Nama belum ada, mau daftar baru?")) {
                     db.ref("users/" + u).set({ password: p }).then(() => {
-                        activeUser = u; 
-                        sessionStorage.setItem("st_user", u);
-                        enterApp(true);
+                        activeUser = u; sessionStorage.setItem("st_user", u); enterApp(true);
                     });
                 }
             }
@@ -419,17 +399,26 @@
     function loginGuest() {
         const u = document.getElementById("guest-name").value.trim();
         if(!u) return alert("Isi nama guest!");
-        activeUser = u + " (Guest)"; 
-        sessionStorage.setItem("st_user", activeUser);
-        enterApp(true);
+        activeUser = u + " (Guest)"; sessionStorage.setItem("st_user", activeUser); enterApp(true);
     }
 
     function enterApp(firstTime) {
         document.getElementById("login-overlay").style.display = "none";
         document.getElementById("main-wrapper").style.display = "block";
-        if(firstTime) {
-            db.ref("global_chats").push({ user: "SYSTEM", text: activeUser + " joined." });
-        }
+        if(firstTime) { db.ref("global_chats").push({ user: "SYSTEM", text: activeUser + " joined." }); }
+    }
+
+    // 3. FUNGSI NAVIGASI (HANYA SATU SAJA)
+    function st(sectionId, btn) {
+        document.querySelectorAll('#main-wrapper section').forEach(section => {
+            section.style.display = 'none';
+        });
+        const target = document.getElementById(sectionId);
+        if (target) { target.style.display = 'block'; }
+        document.querySelectorAll('nav button').forEach(button => {
+            button.classList.remove('active');
+        });
+        if(btn) btn.classList.add('active');
     }
 
     // 4. CHAT SYSTEM
@@ -446,20 +435,15 @@
     }
 
     db.ref("global_chats").limitToLast(15).on("value", snap => {
-        const logs = document.getElementById("chat-logs"); 
-        let html = "";
+        const logs = document.getElementById("chat-logs"); let html = "";
         snap.forEach(s => { html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; });
-        logs.innerHTML = html; 
-        logs.scrollTop = logs.scrollHeight;
+        logs.innerHTML = html; logs.scrollTop = logs.scrollHeight;
     });
 
-    // 5. AUTO LOGIN SESSION
+    // 5. AUTO LOGIN & SESSION
     window.onload = function() {
         const userSaved = sessionStorage.getItem("st_user");
-        if(userSaved) {
-            activeUser = userSaved;
-            enterApp(false);
-        }
+        if(userSaved) { activeUser = userSaved; enterApp(false); }
     };
 </script>
 
