@@ -76,6 +76,32 @@
         .msg-box b { color: var(--blue-btn); display: block; font-size: 9px; }
         .chat-f { display: flex; padding: 10px; background: #fff; border-top: 1px solid #eee; }
         .chat-f input { flex: 1; padding: 8px 15px; border-radius: 20px; font-size: 11px; border: 1px solid #ddd; }
+
+        /* STYLE KHUSUS HOMESTAY & SHOWROOM */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .ready { background: #2ecc71; color: #fff; }
+        .full { background: #e74c3c; color: #fff; }
+        
+        .show-img {
+            width: 100%;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #777;
+            border: 1px dashed var(--y);
+        }
     </style>
 </head>
 
@@ -172,7 +198,7 @@
         </div>
 </section>
 
-    <section id="rental">
+<section id="rental">
         <h2 class="title">VEHICLE RENTAL</h2>
         <div class="grid">
             <div class="card"><h3>BENSON</h3><span class="price-tag">$20/C</span><ul><li>Padlock <b>$345</b></li><li>Insurance <b>$500</b></li></ul></div>
@@ -180,9 +206,47 @@
             <div class="card"><h3>BOAT</h3><span class="price-tag">$22/H</span><ul><li>Padlock <b>$520</b></li><li>Insurance <b>$734</b></li></ul></div>
         </div>
     </section>
-</div>
 
-<div class="chat-ui">
+    <section id="home">
+        <h2 class="title">HOMESTAY LIST</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="status-badge ready">AVAILABLE</div>
+                <h3>APARTMENT SUITE</h3>
+                <span class="price-tag">$500/WEEK</span>
+                <ul>
+                    <li>Location <b>Los Santos</b></li>
+                    <li>Full Room <b>YES</b></li>
+                    <li>Parking <b>FREE</b></li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="status-badge full">FULL BOOKED</div>
+                <h3>LUXURY VILLA</h3>
+                <span class="price-tag">$1.200/WEEK</span>
+                <ul>
+                    <li>Location <b>Richman</b></li>
+                    <li>Pool <b>YES</b></li>
+                    <li>Security <b>24H</b></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="show">
+        <h2 class="title">OUR SHOWROOM</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="show-img">PHOTO PREVIEW</div>
+                <h3>MODERN CLASSIC</h3>
+                <span class="price-tag">CUSTOM</span>
+                <p style="font-size: 11px; color: #aaa;">Desain showroom elegan untuk koleksi mobil mewah anda.</p>
+                <button class="btn-main" style="margin-top:15px; font-size:10px;" onclick="sendChat('Halo, saya ingin tanya jasa Showroom Modern Classic')">KONSULTASI</button>
+            </div>
+        </div>
+    </section>
+
+</div> <div class="chat-ui">
     <div class="chat-h">GLOBAL COMMUNITY CHAT</div>
     <div id="chat-logs"></div>
     <div class="chat-f">
