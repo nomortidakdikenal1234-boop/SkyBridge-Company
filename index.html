@@ -337,38 +337,7 @@
 
         </div> </section> </div>
 
-    </div> </div> </section> </div> <script>
-    // FUNGSI NAVIGASI BIAR PARTNERSHIP MUNCUL PAS DIKLIK
-    function st(sectionId, btn) {
-        // Sembunyiin semua section (ads, showroom, partner, dll)
-        document.querySelectorAll('#main-wrapper section').forEach(section => {
-            section.style.display = 'none';
-        });
-
-        // Munculin section yang dipencet
-        const target = document.getElementById(sectionId);
-        if (target) {
-            target.style.display = 'block';
-        }
-
-        // Pindahin warna kuning (class active) ke tombol yang baru diklik
-        document.querySelectorAll('nav button').forEach(button => {
-            button.classList.remove('active');
-        });
-        btn.classList.add('active');
-    }
-    
-    // Taruh fungsi goStep2() kamu di sini juga biar rapi
-    function goStep2() {
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
-    }
-</script>
-
-</body>
-</html>
-    
-</div> <div class="chat-ui">
+</div> </section> </div> <div class="chat-ui">
     <div class="chat-h">GLOBAL COMMUNITY CHAT</div>
     <div id="chat-logs"></div>
     <div class="chat-f">
@@ -379,18 +348,50 @@
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <script>
-    const cfg = { apiKey: "AIzaSyCpDAf9D2Bv31pnqRIjffL-E9IAP8SqTTy", authDomain: "shin-taeyoung-website.firebaseapp.com", databaseURL: "https://shin-taeyoung-website-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "shin-taeyoung-website", storageBucket: "shin-taeyoung-website.firebasestorage.app", messagingSenderId: "313549044765", appId: "1:313549044765:web:f8e31a68cb677bcfb81af4" };
-    firebase.initializeApp(cfg); const db = firebase.database();
-    
+    // 1. CONFIG FIREBASE
+    const cfg = { 
+        apiKey: "AIzaSyCpDAf9D2Bv31pnqRIjffL-E9IAP8SqTTy", 
+        authDomain: "shin-taeyoung-website.firebaseapp.com", 
+        databaseURL: "https://shin-taeyoung-website-default-rtdb.asia-southeast1.firebasedatabase.app", 
+        projectId: "shin-taeyoung-website", 
+        storageBucket: "shin-taeyoung-website.firebasestorage.app", 
+        messagingSenderId: "313549044765", 
+        appId: "1:313549044765:web:f8e31a68cb677bcfb81af4" 
+    };
+    firebase.initializeApp(cfg); 
+    const db = firebase.database();
     let activeUser = "";
 
-    function goStep2() {
-        document.getElementById("step-1").style.display = "none";
-        document.getElementById("step-2").style.display = "block";
+    // 2. FUNGSI NAVIGASI DASHBOARD (ADS, RENTAL, PARTNER, DLL)
+    function st(sectionId, btn) {
+        // Sembunyikan semua section
+        document.querySelectorAll('#main-wrapper section').forEach(section => {
+            section.style.display = 'none';
+            section.classList.remove('active');
+        });
+
+        // Munculkan yang dipilih
+        const target = document.getElementById(sectionId);
+        if (target) {
+            target.style.display = 'block';
+            target.classList.add('active');
+        }
+
+        // Tombol Kuning
+        document.querySelectorAll('nav button').forEach(button => {
+            button.classList.remove('active');
+        });
+        if(btn) btn.classList.add('active');
     }
 
-// Fungsi Login Akun
+    // 3. FUNGSI LOGIN & AUTH
+    function goStep2() {
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+    }
+
     function handleAuth() {
         const u = document.getElementById("auth-user").value.trim();
         const p = document.getElementById("auth-pass").value.trim();
@@ -400,7 +401,7 @@
             if (snap.exists()) {
                 if (snap.val().password === p) {
                     activeUser = u; 
-                    sessionStorage.setItem("st_user", u); // Simpan session
+                    sessionStorage.setItem("st_user", u);
                     enterApp(true); 
                 } else { alert("Sandi salah!"); }
             } else {
@@ -415,7 +416,6 @@
         });
     }
 
-    // Fungsi Login Tamu
     function loginGuest() {
         const u = document.getElementById("guest-name").value.trim();
         if(!u) return alert("Isi nama guest!");
@@ -424,86 +424,43 @@
         enterApp(true);
     }
 
-    // Fungsi Masuk ke Dashboard
     function enterApp(firstTime) {
         document.getElementById("login-overlay").style.display = "none";
         document.getElementById("main-wrapper").style.display = "block";
-        
-        // Cek supaya kalau cuma refresh, pesan SYSTEM joined nggak spam di chat
         if(firstTime) {
             db.ref("global_chats").push({ user: "SYSTEM", text: activeUser + " joined." });
         }
     }
 
-    // SCRIP OTOMATIS: Cek session pas refresh (PENTING)
-    window.onload = function() {
-        const userSaved = sessionStorage.getItem("st_user");
-        if(userSaved) {
-            activeUser = userSaved;
-            enterApp(false); // Masuk tapi nggak kirim pesan "joined" lagi
-        }
-    };
-
-    function st(id, btn) {
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
-
+    // 4. CHAT SYSTEM
     function send() {
         const i = document.getElementById("chat-in");
-        if(!i.value.trim()) return;
+        if(!i.value.trim() || !activeUser) return;
         db.ref("global_chats").push({ user: activeUser, text: i.value });
         i.value = "";
     }
 
-    db.ref("global_chats").limitToLast(15).on("value", snap => {
-        const logs = document.getElementById("chat-logs"); let html = "";
-        snap.forEach(s => { html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; });
-        logs.innerHTML = html; logs.scrollTop = logs.scrollHeight;
-    });
-
     function sendChat(pesan) {
-        if (!activeUser) return alert("Silahkan login dulu sebelum konsultasi!");
+        if (!activeUser) return alert("Silahkan login dulu!");
+        db.ref("global_chats").push({ user: activeUser, text: pesan });
+    }
 
-        // Kirim ke Firebase
-        db.ref("global_chats").push({
-            user: activeUser,
-            text: pesan
-        });
-
-        // Biar otomatis scroll ke bawah setelah kirim
-        const logs = document.getElementById("chat-logs");
+    db.ref("global_chats").limitToLast(15).on("value", snap => {
+        const logs = document.getElementById("chat-logs"); 
+        let html = "";
+        snap.forEach(s => { html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; });
+        logs.innerHTML = html; 
         logs.scrollTop = logs.scrollHeight;
-    }
-
-function goStep2() {
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
-    }
-
-    function st(sectionId, btn) {
-    // 1. Sembunyikan semua section yang ada di dalam main-wrapper
-    document.querySelectorAll('#main-wrapper section').forEach(section => {
-        section.style.display = 'none';
     });
 
-    // 2. Munculkan section yang diklik (contoh: partner)
-    const target = document.getElementById(sectionId);
-    if (target) {
-        target.style.display = 'block';
-    }
-
-    // 3. Pindahkan class 'active' biar tombolnya nyala kuning
-    document.querySelectorAll('nav button').forEach(button => {
-        button.classList.remove('active');
-    });
-    btn.classList.add('active');
-}
-
-</div> </section> </div> <script>
-    // Pastikan semua fungsi goStep2, st, dkk ada di dalam sini
+    // 5. AUTO LOGIN SESSION
+    window.onload = function() {
+        const userSaved = sessionStorage.getItem("st_user");
+        if(userSaved) {
+            activeUser = userSaved;
+            enterApp(false);
+        }
+    };
 </script>
 
 </body>
