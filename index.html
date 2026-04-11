@@ -352,6 +352,20 @@
         snap.forEach(s => { html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; });
         logs.innerHTML = html; logs.scrollTop = logs.scrollHeight;
     });
+
+    function sendChat(pesan) {
+        if (!activeUser) return alert("Silahkan login dulu sebelum konsultasi!");
+
+        // Kirim ke Firebase
+        db.ref("global_chats").push({
+            user: activeUser,
+            text: pesan
+        });
+
+        // Biar otomatis scroll ke bawah setelah kirim
+        const logs = document.getElementById("chat-logs");
+        logs.scrollTop = logs.scrollHeight;
+    }
 </script>
 </body>
 </html>    
