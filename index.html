@@ -429,10 +429,10 @@
     const db = firebase.database();
     let activeUser = "";
 
-    // Inisialisasi variabel global
+// Cukup satu saja variabelnya
     let activeUser = "";
 
-    // 1. FUNGSI AUTH (Langkah 1 ke Langkah 2)
+    // 1. FUNGSI AUTH (Step 1 ke Step 2)
     function goStep2() {
         const s1 = document.getElementById('step-1');
         const s2 = document.getElementById('step-2');
@@ -442,20 +442,20 @@
         }
     }
 
-    // 2. FUNGSI LOGIN TAMU (GUEST)
+    // 2. FUNGSI LOGIN GUEST
     function loginGuest() {
         const inputName = document.getElementById("guest-name");
-        if (!inputName) return alert("Error: Element guest-name tidak ketemu!");
+        if (!inputName) return;
         
         const u = inputName.value.trim();
-        if (!u) return alert("Isi nama guest dulu!");
+        if (!u) return alert("Isi nama dulu bos!");
         
         activeUser = u + " (Guest)"; 
         sessionStorage.setItem("st_user", activeUser); 
         enterApp();
     }
 
-    // 3. TRANSISI KE APP
+    // 3. MASUK KE WELCOME SCREEN
     function enterApp() {
         const overlay = document.getElementById("login-overlay");
         const welcome = document.getElementById("welcome-screen");
@@ -478,7 +478,7 @@
             if (welcome) welcome.style.display = 'none';
             if (main) main.style.display = 'block';
             
-            // Buka section 'homes' secara otomatis
+            // Klik otomatis tombol HOME (ID: homes)
             const firstBtn = document.querySelector('nav button');
             st('homes', firstBtn);
         }, 800);
@@ -503,7 +503,7 @@
         if (btn) btn.classList.add('active');
     }
 
-    // 6. AUTO LOGIN (CEK SESSION)
+    // 6. AUTO LOGIN
     window.onload = function() {
         const userSaved = sessionStorage.getItem("st_user");
         if (userSaved) { 
@@ -512,6 +512,6 @@
         }
     };
 </script>
-
+    
 </body>
 </html>
