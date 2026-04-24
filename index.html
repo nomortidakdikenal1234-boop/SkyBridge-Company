@@ -473,7 +473,9 @@
     }
 
     function loginGuest() {
-        const u = document.getElementById("guest-name").value.trim();
+        const inputName = document.getElementById("guest-name");
+        if(!inputName) return;
+        const u = inputName.value.trim();
         if(!u) return alert("Isi nama guest!");
         activeUser = u + " (Guest)"; 
         sessionStorage.setItem("st_user", activeUser); 
@@ -483,30 +485,36 @@
     // 2. FUNGSI TRANSISI LAYAR
     function enterApp(isNewLogin) {
         // Sembunyiin login, munculin welcome screen
-        document.getElementById("login-overlay").style.display = "none";
-        document.getElementById("welcome-screen").style.display = "flex";
-        document.getElementById("welcome-screen").style.opacity = "1";
+        const overlay = document.getElementById("login-overlay");
+        const welcome = document.getElementById("welcome-screen");
+        
+        if(overlay) overlay.style.display = "none";
+        if(welcome) {
+            welcome.style.display = "flex";
+            welcome.style.opacity = "1";
+        }
     }
 
     function finishWelcome() {
         const welcome = document.getElementById('welcome-screen');
         const main = document.getElementById('main-wrapper');
         
-        // Efek fade out buat welcome screen
-        welcome.style.opacity = '0';
+        if(welcome) welcome.style.opacity = '0';
         
         setTimeout(() => {
-            welcome.style.display = 'none';
-            // Munculin isi web polosan
-            main.style.display = 'block';
-            // Pastiin section pertama (ADS) langsung tampil
-            st('ads', document.querySelector('nav button.active'));
+            if(welcome) welcome.style.display = 'none';
+            if(main) main.style.display = 'block';
+            
+            // Panggil tab pertama (ADS) tanpa bikin error kalau tombol belum ada
+            const firstBtn = document.querySelector('nav button');
+            st('ads', firstBtn);
         }, 800);
     }
 
     // 3. FUNGSI NAVIGASI
     function st(sectionId, btn) {
-        document.querySelectorAll('#main-wrapper section').forEach(section => {
+        const sections = document.querySelectorAll('#main-wrapper section');
+        sections.forEach(section => {
             section.style.display = 'none';
             section.classList.remove('active');
         });
@@ -517,27 +525,24 @@
             target.classList.add('active');
         }
 
-        document.querySelectorAll('nav button').forEach(button => {
+        const buttons = document.querySelectorAll('nav button');
+        buttons.forEach(button => {
             button.classList.remove('active');
         });
         if(btn) btn.classList.add('active');
     }
 
-    // 4. CHAT SYSTEM
+    // 4. CHAT SYSTEM (Pastiin ID input chat lo adalah 'chat-input')
     function send() {
-        const i = document.getElementById("chat-in"); // pastiin ID input chat lo bener
-        if(!i.value.trim() || !activeUser) return;
+        const i = document.getElementById("chat-input"); 
+        if(!i || !i.value.trim() || !activeUser) return;
         db.ref("global_chats").push({ user: activeUser, text: i.value });
         i.value = "";
     }
 
-    function sendChat(pesan) {
-        if (!activeUser) return alert("Silahkan login dulu!");
-        db.ref("global_chats").push({ user: activeUser, text: pesan });
-    }
-
     db.ref("global_chats").limitToLast(15).on("value", snap => {
         const logs = document.getElementById("chat-logs"); 
+        if(!logs) return;
         let html = "";
         snap.forEach(s => { 
             html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; 
