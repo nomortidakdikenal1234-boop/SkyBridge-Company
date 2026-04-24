@@ -438,7 +438,7 @@
 <script>
     let activeUser = "";
 
-    // 1. FUNGSI AUTH & LOGIN
+    // 1. FUNGSI AUTH
     function goStep2() {
         const s1 = document.getElementById('step-1');
         const s2 = document.getElementById('step-2');
@@ -482,57 +482,40 @@
         enterApp(true);
     }
 
-    // 2. FUNGSI TRANSISI LAYAR
+    // 2. TRANSISI LAYAR
     function enterApp(isNewLogin) {
-        // Sembunyiin login, munculin welcome screen
         const overlay = document.getElementById("login-overlay");
         const welcome = document.getElementById("welcome-screen");
-        
         if(overlay) overlay.style.display = "none";
         if(welcome) {
             welcome.style.display = "flex";
-            welcome.style.opacity = "1";
+            setTimeout(() => { welcome.style.opacity = "1"; }, 10);
         }
     }
 
     function finishWelcome() {
         const welcome = document.getElementById('welcome-screen');
         const main = document.getElementById('main-wrapper');
-        
         if(welcome) welcome.style.opacity = '0';
-        
         setTimeout(() => {
             if(welcome) welcome.style.display = 'none';
             if(main) main.style.display = 'block';
-            
-            // Panggil tab pertama (ADS) tanpa bikin error kalau tombol belum ada
-            const firstBtn = document.querySelector('nav button');
-            st('ads', firstBtn);
+            st('ads', document.querySelector('nav button'));
         }, 800);
     }
 
-    // 3. FUNGSI NAVIGASI
+    // 3. NAVIGASI
     function st(sectionId, btn) {
         const sections = document.querySelectorAll('#main-wrapper section');
-        sections.forEach(section => {
-            section.style.display = 'none';
-            section.classList.remove('active');
-        });
-        
+        sections.forEach(s => { s.style.display = 'none'; s.classList.remove('active'); });
         const target = document.getElementById(sectionId);
-        if (target) { 
-            target.style.display = 'block'; 
-            target.classList.add('active');
-        }
-
+        if (target) { target.style.display = 'block'; target.classList.add('active'); }
         const buttons = document.querySelectorAll('nav button');
-        buttons.forEach(button => {
-            button.classList.remove('active');
-        });
+        buttons.forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
     }
 
-    // 4. CHAT SYSTEM (Pastiin ID input chat lo adalah 'chat-input')
+    // 4. CHAT
     function send() {
         const i = document.getElementById("chat-input"); 
         if(!i || !i.value.trim() || !activeUser) return;
@@ -544,14 +527,12 @@
         const logs = document.getElementById("chat-logs"); 
         if(!logs) return;
         let html = "";
-        snap.forEach(s => { 
-            html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; 
-        });
+        snap.forEach(s => { html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; });
         logs.innerHTML = html; 
         logs.scrollTop = logs.scrollHeight;
     });
 
-    // 5. AUTO LOGIN & SESSION
+    // 5. AUTO LOGIN
     window.onload = function() {
         const userSaved = sessionStorage.getItem("st_user");
         if(userSaved) { 
