@@ -108,32 +108,29 @@
 
 <body>
 
-    <div id="login-overlay">
+<div id="login-overlay">
         <div class="login-card">
-            <h2 style="color: var(--blue-btn)">ST Co.</h2>
-            <p id="auth-title">Sign in to your account</p>
+            <h2 style="color: var(--blue-btn); margin-bottom: 5px;">Shin Taeyoung Co.</h2>
+            <p id="auth-title" style="font-size: 12px; color: #777; margin-bottom: 25px;">Sign in to your account</p>
+            
+            <div id="step-1">
+                <button class="btn-google" onclick="goStep2()">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width: 18px;">
+                    Sign in with Google
+                </button>
+                <div class="divider">ATAU GUEST</div>
+                <input type="text" id="guest-name" placeholder="Nama Guest">
+                <button class="btn-main" onclick="loginGuest()">Masuk Sebagai Tamu</button>
             </div>
-    </div>
 
-    <div id="main-wrapper">
+            <div id="step-2" style="display:none">
+                <input type="text" id="auth-user" placeholder="Username">
+                <input type="password" id="auth-pass" placeholder="Password">
+                <button class="btn-main" onclick="handleAuth()">Login / Create Account</button>
+                <p onclick="location.reload()" style="margin-top:15px; cursor:pointer; font-size:10px; color:var(--blue-btn)">Kembali</p>
+            </div>
+        </div> </div> <div id="main-wrapper">
         </div>
-        
-        <div id="step-1">
-            <button class="btn-google" onclick="goStep2()">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
-                Sign in with Google
-            </button>
-            <div class="divider">ATAU GUEST</div>
-            <input type="text" id="guest-name" placeholder="Nama Guest">
-            <button class="btn-main" onclick="loginGuest()">Masuk Sebagai Tamu</button>
-        </div>
-
-<div id="step-2" style="display:none">
-            <input type="text" id="auth-user" placeholder="Username">
-            <input type="password" id="auth-pass" placeholder="Password">
-            <button class="btn-main" onclick="handleAuth()">Login / Create Account</button>
-            <p onclick="location.reload()" style="margin-top:15px; cursor:pointer; font-size:10px; color:var(--blue-btn)">Kembali</p>
-        </div> </div> </div>
 
 <div id="main-wrapper">
     <header>
