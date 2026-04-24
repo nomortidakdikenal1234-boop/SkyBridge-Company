@@ -430,79 +430,62 @@
     let activeUser = "";
 
 <script>
+    // Inisialisasi variabel global
     let activeUser = "";
 
-    // 1. FUNGSI AUTH
+    // 1. FUNGSI AUTH (Langkah 1 ke Langkah 2)
     function goStep2() {
         const s1 = document.getElementById('step-1');
         const s2 = document.getElementById('step-2');
-        if(s1 && s2) {
+        if (s1 && s2) {
             s1.style.display = 'none';
             s2.style.display = 'block';
         }
     }
 
-    function handleAuth() {
-        const u = document.getElementById("auth-user").value.trim();
-        const p = document.getElementById("auth-pass").value.trim();
-        if(u.length < 3 || p.length < 4) return alert("Username min 3, Password min 4!");
-        
-        db.ref("users/" + u).once("value", (snap) => {
-            if (snap.exists()) {
-                if (snap.val().password === p) {
-                    activeUser = u; 
-                    sessionStorage.setItem("st_user", u); 
-                    enterApp(true);
-                } else { alert("Sandi salah!"); }
-            } else {
-                if(confirm("Nama belum ada, mau daftar baru?")) {
-                    db.ref("users/" + u).set({ password: p }).then(() => {
-                        activeUser = u; 
-                        sessionStorage.setItem("st_user", u); 
-                        enterApp(true);
-                    });
-                }
-            }
-        });
-    }
-
+    // 2. FUNGSI LOGIN TAMU (GUEST)
     function loginGuest() {
         const inputName = document.getElementById("guest-name");
-        if(!inputName) return;
+        if (!inputName) return alert("Error: Element guest-name tidak ketemu!");
+        
         const u = inputName.value.trim();
-        if(!u) return alert("Isi nama guest!");
+        if (!u) return alert("Isi nama guest dulu!");
+        
         activeUser = u + " (Guest)"; 
         sessionStorage.setItem("st_user", activeUser); 
-        enterApp(true);
+        enterApp();
     }
 
-    // 2. TRANSISI LAYAR
-    function enterApp(isNewLogin) {
+    // 3. TRANSISI KE APP
+    function enterApp() {
         const overlay = document.getElementById("login-overlay");
         const welcome = document.getElementById("welcome-screen");
-        if(overlay) overlay.style.display = "none";
-        if(welcome) {
+        
+        if (overlay) overlay.style.display = "none";
+        if (welcome) {
             welcome.style.display = "flex";
-            setTimeout(() => { welcome.style.opacity = "1"; }, 10);
+            setTimeout(() => { welcome.style.opacity = "1"; }, 50);
         }
     }
 
+    // 4. SELESAI WELCOME (MASUK KE HOMES)
     function finishWelcome() {
         const welcome = document.getElementById('welcome-screen');
         const main = document.getElementById('main-wrapper');
-        if(welcome) welcome.style.opacity = '0';
+        
+        if (welcome) welcome.style.opacity = '0';
         
         setTimeout(() => {
-            if(welcome) welcome.style.display = 'none';
-            if(main) main.style.display = 'block';
+            if (welcome) welcome.style.display = 'none';
+            if (main) main.style.display = 'block';
             
-            // PAKAI ID 'homes' SESUAI REQUEST
+            // Buka section 'homes' secara otomatis
             const firstBtn = document.querySelector('nav button');
             st('homes', firstBtn);
         }, 800);
     }
 
-    // 3. NAVIGASI
+    // 5. NAVIGASI MENU
     function st(sectionId, btn) {
         const sections = document.querySelectorAll('#main-wrapper section');
         sections.forEach(s => { 
@@ -518,36 +501,15 @@
 
         const buttons = document.querySelectorAll('nav button');
         buttons.forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
+        if (btn) btn.classList.add('active');
     }
 
-    // 4. CHAT (Pastiin ID inputnya 'chat-input')
-    function send() {
-        const i = document.getElementById("chat-input"); 
-        if(!i || !i.value.trim() || !activeUser) return;
-        db.ref("global_chats").push({ user: activeUser, text: i.value });
-        i.value = "";
-    }
-
-    if (typeof db !== 'undefined') {
-        db.ref("global_chats").limitToLast(15).on("value", snap => {
-            const logs = document.getElementById("chat-logs"); 
-            if(!logs) return;
-            let html = "";
-            snap.forEach(s => { 
-                html += `<div class="msg-box"><b>${s.val().user}</b> ${s.val().text}</div>`; 
-            });
-            logs.innerHTML = html; 
-            logs.scrollTop = logs.scrollHeight;
-        });
-    }
-
-    // 5. AUTO LOGIN
+    // 6. AUTO LOGIN (CEK SESSION)
     window.onload = function() {
         const userSaved = sessionStorage.getItem("st_user");
-        if(userSaved) { 
+        if (userSaved) { 
             activeUser = userSaved; 
-            enterApp(false); 
+            enterApp(); 
         }
     };
 </script>
