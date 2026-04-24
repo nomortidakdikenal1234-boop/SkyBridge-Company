@@ -13,6 +13,29 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
+                /* Custom Cursor Bulat */
+        * {
+        cursor: none !important; /* Sembunyikan kursor asli */
+        }
+
+        #custom-cursor {
+        width: 20px;
+        height: 20px;
+        background: var(--y); /* Warna kuning/gold tema lo */
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        box-shadow: 0 0 15px var(--y);
+        }
+
+        /* Efek pas klik */
+        .cursor-click {
+        transform: scale(1.5);
+        background: #fff !important;
+        }  
+        
         /* LOGIN SCREEN ANTARES */
         #login-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
@@ -77,28 +100,6 @@
         .chat-f { display: flex; padding: 10px; background: #fff; border-top: 1px solid #eee; }
         .chat-f input { flex: 1; padding: 8px 15px; border-radius: 20px; font-size: 11px; border: 1px solid #ddd; }
 
-        /* Custom Cursor Bulat */
-        * {
-        cursor: none !important; /* Sembunyikan kursor asli */
-        }
-
-        #custom-cursor {
-        width: 20px;
-        height: 20px;
-        background: var(--y); /* Warna kuning/gold tema lo */
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 0.1s ease;
-        box-shadow: 0 0 15px var(--y);
-        }
-
-        /* Efek pas klik */
-        .cursor-click {
-        transform: scale(1.5);
-        background: #fff !important;
-        }  
         
         /* STYLE KHUSUS HOMESTAY & SHOWROOM */
         .status-badge {
