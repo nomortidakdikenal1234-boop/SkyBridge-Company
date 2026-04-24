@@ -425,14 +425,13 @@
         messagingSenderId: "313549044765", 
         appId: "1:313549044765:web:f8e31a68cb677bcfb81af4" 
     };
+<script>
+    // 1. INISIALISASI (Hapus deklarasi ganda di sini)
     if (!firebase.apps.length) { firebase.initializeApp(cfg); }
     const db = firebase.database();
-    let activeUser = "";
+    let activeUser = ""; 
 
-// Cukup satu saja variabelnya
-    let activeUser = "";
-
-    // 1. FUNGSI AUTH (Step 1 ke Step 2)
+    // 2. FUNGSI AUTH
     function goStep2() {
         const s1 = document.getElementById('step-1');
         const s2 = document.getElementById('step-2');
@@ -442,7 +441,7 @@
         }
     }
 
-    // 2. FUNGSI LOGIN GUEST
+    // 3. FUNGSI LOGIN GUEST
     function loginGuest() {
         const inputName = document.getElementById("guest-name");
         if (!inputName) return;
@@ -455,7 +454,7 @@
         enterApp();
     }
 
-    // 3. MASUK KE WELCOME SCREEN
+    // 4. TRANSISI KE WELCOME SCREEN
     function enterApp() {
         const overlay = document.getElementById("login-overlay");
         const welcome = document.getElementById("welcome-screen");
@@ -467,7 +466,7 @@
         }
     }
 
-    // 4. SELESAI WELCOME (MASUK KE HOMES)
+    // 5. SELESAI WELCOME (MASUK KE HOMES)
     function finishWelcome() {
         const welcome = document.getElementById('welcome-screen');
         const main = document.getElementById('main-wrapper');
@@ -478,13 +477,13 @@
             if (welcome) welcome.style.display = 'none';
             if (main) main.style.display = 'block';
             
-            // Klik otomatis tombol HOME (ID: homes)
+            // Otomatis panggil section 'homes' sesuai request lo
             const firstBtn = document.querySelector('nav button');
             st('homes', firstBtn);
         }, 800);
     }
 
-    // 5. NAVIGASI MENU
+    // 6. NAVIGASI MENU (SINKRON DENGAN ID homes)
     function st(sectionId, btn) {
         const sections = document.querySelectorAll('#main-wrapper section');
         sections.forEach(s => { 
@@ -503,7 +502,7 @@
         if (btn) btn.classList.add('active');
     }
 
-    // 6. AUTO LOGIN
+    // 7. AUTO LOGIN
     window.onload = function() {
         const userSaved = sessionStorage.getItem("st_user");
         if (userSaved) { 
