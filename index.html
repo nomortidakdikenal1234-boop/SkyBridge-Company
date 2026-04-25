@@ -72,15 +72,25 @@
             transform: scale(1.05);
         }
 
-        /* --- 3. HERO SECTION & PORTAL --- */
+/* --- 3. HERO SECTION & PORTAL --- */
         .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), 
-                        url('https://i.postimg.cc/tCJhtgy9/Chat-GPT-Image-25-Apr-2026-10-49-38.png');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            /* Tambahkan background-color supaya sisa layar tidak putih polos */
+            background-color: #0055ff; 
+            background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), 
+                              url('https://i.postimg.cc/tCJhtgy9/Chat-GPT-Image-25-Apr-2026-10-49-38.png');
+            
+            /* UBAH BAGIAN INI */
+            background-size: 50%; /* Atur persentase ini (misal 40% atau 50%) sesuai selera lo */
+            background-position: center; 
+            background-repeat: no-repeat; /* Biar logonya nggak muncul banyak (tile) */
+            background-attachment: fixed;
         }
-
+        
         .enter-btn {
             padding: 15px 45px; font-size: 18px; font-weight: 800;
             color: #0055ff; background: rgba(255, 255, 255, 0.85);
