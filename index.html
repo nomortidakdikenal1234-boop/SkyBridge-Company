@@ -25,16 +25,19 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             position: fixed; pointer-events: none;
-            z-index: 9999; transition: transform 0.1s ease-out;
+            z-index: 9999; 
+            /* Ganti ke 0.4s supaya pas kursor balik mengecil tetep smooth lamban */
+            transition: transform 0.4s ease-out; 
             transform: translate(-50%, -50%);
         }
 
-            /* Animasi saat diklik */
+        /* Animasi saat diklik */
         #custom-cursor.click-anim {
-            transform: translate(-50%, -50%) scale(2.5); /* Membesar 2.5x lipat */
-            background: rgba(0, 85, 255, 0.3); /* Berubah warna transparan dikit */
-            border-color: #ffffff; /* Border jadi putih biar kontras */
-            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%) scale(2.5);
+            background: rgba(0, 85, 255, 0.3);
+            border-color: #ffffff;
+            /* Ganti ke 0.4s biar pas membesar kelihatan cinematic (lamban) */
+            transition: transform 0.4s ease-out;
         }
         
 /* --- 2. NAVIGATION BAR (UPDATED) --- */
